@@ -1,4 +1,4 @@
-package promotionused_test
+package test
 
 import (
 	"io/ioutil"

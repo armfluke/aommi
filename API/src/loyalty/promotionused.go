@@ -1,11 +1,11 @@
-package promotionused
+package loyalty
 
 import (
 	"encoding/json"
 	"net/http"
 )
 
-type Promotion struct {
+type Promotions struct {
 	Prmt string `json:"promotionID"`
 	Rewc string `json:"rewardcode"`
 	Name string `json:"accountID"`
