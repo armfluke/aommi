@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:id="@+id/rlvBalancePoint"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="20dp"
@@ -46,5 +48,13 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcvPromotionList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </LinearLayout>
