@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "b9a2d08f-48d1-4074-9a9d-6f792e53561c",
+		"name": "Test_By_Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test_Load_Promotion_By_GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "834de7b9-d4db-41fe-b40a-98ec72c58035",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"promotion loaded by GET\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    var testData = [",
+							"            { ",
+							"                promotionID: 1,",
+							"                promotionName: \"ตั๋วหนังฟรีMajor\",",
+							"                reward: \"ตั๋วหนังMajor\",",
+							"                redeemCondition:\"\",",
+							"                point:100,",
+							"                image:\"\"",
+							"            },",
+							"            { ",
+							"                promotionID: 2,",
+							"                promotionName: \"Starbuck voucher\",",
+							"                reward: \"Starbuck voucher 100 bath\",",
+							"                redeemCondition:\"\",",
+							"                point:200,",
+							"                image:\"\"",
+							"            },",
+							"            { ",
+							"                promotionID: 3,",
+							"                promotionName: \"Digital Salak\",",
+							"                reward: \"Digital Salak 1 unit\",",
+							"                redeemCondition:\"\",",
+							"                point:100,",
+							"                image:\"\"",
+							"            },",
+							"            { ",
+							"                promotionID: 4,",
+							"                promotionName: \"Major movie\",",
+							"                reward: \"Major movie 1 unit\",",
+							"                redeemCondition:\"\",",
+							"                point:300,",
+							"                image:\"\"",
+							"            },",
+							"            { ",
+							"                promotionID: 5,",
+							"                promotionName: \"SF movie\",",
+							"                reward: \"SF movie 1 unit\",",
+							"                redeemCondition:\"\",",
+							"                point:300,",
+							"                image:\"\"",
+							"            },",
+							"            { ",
+							"                promotionID: 6,",
+							"                promotionName: \"True Coffee voucher\",",
+							"                reward: \"True Coffee voucher 100 bath\",",
+							"                redeemCondition:\"\",",
+							"                point:200,",
+							"                image:\"\"",
+							"            },",
+							"            { ",
+							"                promotionID: 7,",
+							"                promotionName: \"Central gift voucher\",",
+							"                reward: \"Central gift voucher 100 bath\",",
+							"                redeemCondition:\"\",",
+							"                point:200,",
+							"                image:\"\"",
+							"            },",
+							"            { ",
+							"                promotionID: 8,",
+							"                promotionName: \"Bag\",",
+							"                reward: \"Bag\",",
+							"                redeemCondition:\"\",",
+							"                point:400,",
+							"                image:\"\"",
+							"            },",
+							"    ];",
+							"    pm.expect(jsonData).to.eql(testData)",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "name",
+						"value": "world",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"world\"}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/hello-post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"hello-post"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
