@@ -1,0 +1,8 @@
+CREATE TABLE promotion (
+PromotionID INT(11) AUTO_INCREMENT PRIMARY KEY,
+PromotionName VARCHAR(100),
+Reward VARCHAR(300) NOT NULL,
+Redeem_condition VARCHAR(300),
+Point INT(5),
+Image VARCHAR(300)
+)DEFAULT CHARSET=utf8;
