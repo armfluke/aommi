@@ -14,11 +14,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         addPromotions()
+        setRecyclerView()
 
+
+    }
+
+    private fun setRecyclerView() {
         rcvPromotionList.layoutManager = LinearLayoutManager(this)
-
         rcvPromotionList.adapter = PromotionAdapter(promotion, this)
-
     }
 
     fun addPromotions() {
