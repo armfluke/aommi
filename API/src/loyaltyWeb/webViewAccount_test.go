@@ -30,10 +30,11 @@ func Test_Get_PromotionByWeb_Should_Return_All_Promotion(t *testing.T) {
 	</html>`
 	r, _ := http.NewRequest(http.MethodGet,"/web/account/",nil)
 	w := httptest.NewRecorder()
-	WebViewPromotion(w, r)
+	WebViewAccount(w, r)
 	resp := w.Result()
 	body, _ := ioutil.ReadAll(resp.Body)
 	actual := strings.TrimSpace(string(body))
+
 	if actual != expected {
 		t.Errorf("expect\n'%s' but got\n'%s'", expected, actual)
 	}
