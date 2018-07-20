@@ -19,13 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".RewardActivity"/>
-=======
-        <activity android:name=".activity.RewardActivity">
 
+        <activity android:name=".activity.RewardActivity">
         </activity>
->>>>>>> 6e2f4a1d8734e40bc7bc72f9f3a52273f884aa11
+
     </application>
 
 </manifest>
