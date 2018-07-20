@@ -18,19 +18,19 @@ import retrofit2.Callback
 
 class MainActivity : AppCompatActivity() {
 
-    private val promotion: ArrayList<String> = ArrayList()
+    private var promotion: List<PromotionDataResponse> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        addPromotions()
+        getAllPromotion()
+
+        //addPromotions()
         setBalancePoint()
-        setRecyclerView()
+        //setRecyclerView()
 
         clickPromotion()
-
-        getAllPromotion()
     }
 
     private fun getAllPromotion(){
@@ -46,8 +46,15 @@ class MainActivity : AppCompatActivity() {
                 is Result.Success -> {
                     val data = result.get()
                     Log.d("armfluke", data)
-                    val promotion = Klaxon().parseArray<PromotionDataResponse>(data)
-                    Log.d("armfluke", promotion!![0].promotionName)
+                    val pro = Klaxon().parseArray<PromotionDataResponse>(data)
+                    Log.d("armfluke", pro!![0].promotionName)
+                    //promotion = pro.toMutableList()
+                    //Log.d("armfluke", promotion!![0].promotionName)
+                    tvPromotionName.text = pro!![0].promotionName
+                    tvPromotionUsePoint.text = pro!![0].point.toString()
+                    //setRecyclerView(promotion)
+                    //rcvPromotionList.adapter?.notifyDataSetChanged()
+
             }
             }
         }
@@ -70,39 +77,9 @@ class MainActivity : AppCompatActivity() {
         rcvPromotionList.adapter = PromotionAdapter(promotion, this)
     }
 
-    private fun addPromotions() {
+    /*private fun addPromotions() {
         promotion.add("หลวงพี่แจ๊ส 5G")
         promotion.add("หลวงพี่แจ๊ส 6G")
-    }
+    }*/
 
-    private fun loadService() {
-        /*RestAPI().create().getPromotion(object: Callback<List<PromotionDataResponse>> {
-            override fun success(call: Call<PromotionResponse>?, response: Response<PromotionResponse>?) {
-                if (response!!.isSuccessful) {
-                    Log.d("armfluke", "Successful!!!!!!")
-                    val promo = response.body()
-                    Log.d("armfluke", promo.toString())
-                }
-            }
-        })*/
-
-        /*override fun onFailure(call: Call<PromotionResponse>?, t: Throwable?) {
-            Log.d("armfluke", "Fail!!!!!!")
-            Log.d("armfluke", t.toString())
-        })*//*.enqueue(object : Callback<List<PromotionDataResponse>> {
-            override fun onResponse(call: Call<PromotionResponse>?, response: Response<PromotionResponse>?) {
-                if (response!!.isSuccessful) {
-                    Log.d("armfluke", "Successful!!!!!!")
-                    val promo = response.body()
-                    Log.d("armfluke", promo.toString())
-                }
-            }
-
-            override fun onFailure(call: Call<PromotionResponse>?, t: Throwable?) {
-                Log.d("armfluke", "Fail!!!!!!")
-                Log.d("armfluke", t.toString())
-            }
-
-        })*/
-    }
 }
