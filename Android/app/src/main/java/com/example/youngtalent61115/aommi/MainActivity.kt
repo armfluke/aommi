@@ -1,8 +1,10 @@
 package com.example.youngtalent61115.aommi
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,9 +16,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         addPromotions()
+        setBalancePoint()
         setRecyclerView()
 
+        clickPromotion()
 
+
+
+    }
+
+    private fun clickPromotion() {
+        relPromotion1.setOnClickListener {
+            //to detail
+            val intent = Intent(applicationContext, RewardActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun setBalancePoint() {
+        tvBalancePoint.text = "300"
     }
 
     private fun setRecyclerView() {
@@ -24,7 +42,9 @@ class MainActivity : AppCompatActivity() {
         rcvPromotionList.adapter = PromotionAdapter(promotion, this)
     }
 
-    fun addPromotions() {
+    private fun addPromotions() {
         promotion.add("หลวงพี่แจ๊ส 5G")
-        promotion.add("หลวงพี่แจ๊ส 6G") }
+        promotion.add("หลวงพี่แจ๊ส 6G")
+    }
+
 }
