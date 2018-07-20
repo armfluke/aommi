@@ -9,4 +9,7 @@ class RewardActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reward)
     }
+    fun decreasePoint(currentBalance: Int, decreasePoint: Int): Int {
+        return currentBalance - decreasePoint
+    }
 }
