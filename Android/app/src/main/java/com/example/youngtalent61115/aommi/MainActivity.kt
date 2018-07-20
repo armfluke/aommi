@@ -3,6 +3,7 @@ package com.example.youngtalent61115.aommi
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,8 +18,16 @@ class MainActivity : AppCompatActivity() {
         setBalancePoint()
         setRecyclerView()
 
+        clickPromotion()
 
 
+
+    }
+
+    private fun clickPromotion() {
+        relPromotion1.setOnClickListener {
+            //to detail
+        }
     }
 
     private fun setBalancePoint() {
