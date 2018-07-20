@@ -27,7 +27,7 @@ func Test_Get_Promotion_Should_Return_All_Promotion(t *testing.T) {
 
 func Test_Promotion_Json_Input_PromotionID_1_AccountID_1100400758552_Rewardcode_MAJ123ABC_Should_Be_Json_StatusCode_200_Status_ok(t *testing.T) {
 	expected := `{"statusCode":200,"status":"ok"}`
-	msg := `{"accountID":"1100400758552,"promotionID":1,"rewardCode":"MAJ123ABC"}`
+	msg := `{"accountID":"1100400758552","promotionID":1,"rewardCode":"MAJ123ABC"}`
 
 	r, _ := http.NewRequest(http.MethodPost, "/promotion/use", strings.NewReader(msg))
 	w := httptest.NewRecorder()
