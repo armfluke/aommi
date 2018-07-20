@@ -27,10 +27,20 @@ class RewardActivity : AppCompatActivity(){
             //to detail
             val builder = AlertDialog.Builder(this@RewardActivity)
             val poinForRedeem = decreasePoint(1000,100).toString()
-            builder.setMessage("คุณได้ทำการใช้พอยต์เพื่อแลกบัตรดูหนังในเครือเมเจอร์ "+poinForRedeem+ " coin")
-            builder.setPositiveButton("ยืนยัน", DialogInterface.OnClickListener { dialog, id ->
+            builder.setMessage("คุณได้ทำการใช้คอยน์เพื่อแลกบัตรดูหนังในเครือเมเจอร์ "+poinForRedeem+ " coin")
+            builder.setPositiveButton("ยืนยัน", DialogInterface.OnClickListener { dialog, id -> finish(
 
+            )
+                val intent = Intent(applicationContext, ShowCodeRedeemActivity::class.java)
+                startActivity(intent)
             })
+
+
+            builder.setNegativeButton("ยกเลิก") { dialog, id -> dialog.cancel()
+                //dialog.dismiss();
+            }
+            builder.setTitle("Redeem")
+
             builder.show()
         }
     }
