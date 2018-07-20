@@ -3,7 +3,6 @@ package loyalty
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -34,8 +33,6 @@ func GetPromotion(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	message := GetPromotionFromDatabase()
-
-	fmt.Println("Request Get")
 
 	w.Write([]byte(message))
 }
