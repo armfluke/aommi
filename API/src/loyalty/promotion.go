@@ -3,6 +3,7 @@ package loyalty
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -22,7 +23,6 @@ type PromotionUsed struct {
 	AccountID   string `json:"accountID"`
 	PromotionID int    `json:"promotionID"`
 	RewardCode  string `json:"rewardCode"`
-	Date        string `json:"date"`
 }
 
 type Status struct {
@@ -33,8 +33,9 @@ type Status struct {
 func GetPromotion(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	//message := Promotion{PromotionID: 1, PromotionName: "ตั๋วหนังฟรีMajor", Reward: "ตั๋วหนังMajor", Condition: "", Point: 100, Image: ""}
 	message := GetPromotionFromDatabase()
+
+	fmt.Println("Request Get")
 
 	w.Write([]byte(message))
 }
@@ -118,13 +119,13 @@ func GetPromotionFromDatabase() string {
 			}
 
 			switch columns[i] {
-			case "PromtotionID":
+			case "PromotionID":
 				data.PromotionID, _ = strconv.Atoi(value)
 			case "PromotionName":
 				data.PromotionName = value
 			case "Reward":
 				data.Reward = value
-			case "Redeem_condition":
+			case "RedeemCondition":
 				data.Condition = value
 			case "Point":
 				data.Point, _ = strconv.Atoi(value)
