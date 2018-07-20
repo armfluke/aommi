@@ -25,10 +25,20 @@ func Test_Get_Account_Should_Return_All_Account(t *testing.T) {
 	}
 }
 
-func Test_ActionToTest_Input_JSON_Should_Be_AccountJSON(t *testing.T) {
+func Test_ActionToTest_Input_JSON_Should_Be_AllAccountJSON(t *testing.T) {
 	expectedResult := `[{"accountID":"1100400758552","accountName":"ปวรืศร มยานนท์","pointBalance":0},{"accountID":"1140100074828","accountName":"วรพรต เดชลรัตน์","pointBalance":3000}]`
 
-	actualResult := GetAccountFromDatabase()
+	actualResult := GetAllAccountFromDatabase()
+
+	if expectedResult != actualResult {
+		t.Errorf("expected\n%s but got\n%s", expectedResult, actualResult)
+	}
+}
+
+func Test_ActionToTest_Input_JSON_Should_Be_AccountJSON(t *testing.T) {
+	expectedResult := `[{"accountID":"1140100074828","accountName":"วรพรต เดชลรัตน์","pointBalance":3000}]`
+
+	actualResult := GetAccountFromDatabase("1140100074828")
 
 	if expectedResult != actualResult {
 		t.Errorf("expected\n%s but got\n%s", expectedResult, actualResult)
