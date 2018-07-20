@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	http.HandleFunc("/account", loyalty.GetAccount)
 	http.HandleFunc("/promotion", loyalty.GetPromotion)
 	http.HandleFunc("/promotion/use", loyalty.UsePromotion)
 	http.HandleFunc("/web/promotion", loyaltyWeb.WebViewPromotion)
