@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RewardActivity">
+        <activity android:name=".activity.RewardActivity">
 
         </activity>
     </application>
