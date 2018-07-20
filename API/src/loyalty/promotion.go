@@ -118,7 +118,7 @@ func GetPromotionFromDatabase() string {
 			}
 
 			switch columns[i] {
-			case "PromtotionID":
+			case "PromotionID":
 				data.PromotionID, _ = strconv.Atoi(value)
 			case "PromotionName":
 				data.PromotionName = value

@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
-	"fmt"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -83,8 +83,6 @@ func GetAccountFromDatabase() string {
 						PointBalance: data.PointBalance,
 					})
 			}
-
-			fmt.Println(columns[i] + " : " + value)
 		}
 	}
 
