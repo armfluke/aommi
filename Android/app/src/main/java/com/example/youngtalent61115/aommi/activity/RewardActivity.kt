@@ -26,12 +26,18 @@ class RewardActivity : AppCompatActivity(){
         btn_redeem.setOnClickListener {
             //to detail
             val builder = AlertDialog.Builder(this@RewardActivity)
-            val poinForRedeem = decreasePoint(1000,100).toString()
-            builder.setMessage("คุณได้ทำการใช้คอยน์เพื่อแลกบัตรดูหนังในเครือเมเจอร์ "+poinForRedeem+ " coin")
+            val poinForRedeem = decreasePoint(1000,100)
+            var messageForSucces = ""
+            if(poinForRedeem >= 0){
+                messageForSucces = "คุณได้ทำการใช้คอยน์เพื่อแลกบัตรดูหนังในเครือเมเจอร์ " + poinForRedeem.toString()+" coin"
+            }else messageForSucces = "ขออภัย จำนวนพอยต์ของคุณไม่พอ"
+            builder.setMessage(messageForSucces)
             builder.setPositiveButton("ยืนยัน", DialogInterface.OnClickListener { dialog, id -> finish(
 
             )
                 val intent = Intent(applicationContext, ShowCodeRedeemActivity::class.java)
+                var redeemCode = generateCode(8)
+                intent.putExtra("RedeemCode",redeemCode)
                 startActivity(intent)
             })
 
