@@ -1,4 +1,4 @@
-package com.example.youngtalent61115.aommi
+package com.example.youngtalent61115.aommi.activity
 
 import org.junit.Assert.*
 import org.junit.Test
