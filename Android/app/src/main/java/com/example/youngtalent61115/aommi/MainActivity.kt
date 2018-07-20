@@ -1,5 +1,6 @@
 package com.example.youngtalent61115.aommi
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private fun clickPromotion() {
         relPromotion1.setOnClickListener {
             //to detail
+            val intent = Intent(applicationContext, RewardActivity::class.java)
+            startActivity(intent)
         }
     }
 
