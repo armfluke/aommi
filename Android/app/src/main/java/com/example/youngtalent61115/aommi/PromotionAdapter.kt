@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import com.staytuned.mo.tngptutorial.networking.PromotionDataResponse
+import android.widget.Toast
 import kotlinx.android.synthetic.main.promotion_list_item.view.*
 
-class PromotionAdapter(val list: /*ArrayList<String>*/List<PromotionDataResponse>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class PromotionAdapter(val list: ArrayList<String>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
 
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.promotion_list_item, p0, false))
@@ -21,15 +21,16 @@ class PromotionAdapter(val list: /*ArrayList<String>*/List<PromotionDataResponse
     }
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        p0?.tvPromotionName?.text = list[p1].promotionName
-        p0?.tvPromotionUsePoint?.text = list[p1].point.toString()
-        Log.d("armfluke", "!!!!"+list[p1]!!.promotionName)
+        p0?.tvPromotionName?.text = list[p1]
+
+        p0.itemView.setOnClickListener{
+            Log.d("beer","name: ${p0.tvPromotionName.text}")
+        }
     }
 
 }
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view){
-    val tvPromotionName = view.tvPromotionName
-    val tvPromotionUsePoint = view.tvPromotionUsePoint
+class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
+    val tvPromotionName = itemView.tvPromotionName
 
 }

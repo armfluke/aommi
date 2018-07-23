@@ -5,32 +5,36 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.view.View
 import com.beust.klaxon.Klaxon
 import com.example.youngtalent61115.aommi.activity.RewardActivity
+import com.example.youngtalent61115.aommi.activity.ScanQRActivity
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
-import com.staytuned.mo.tngptutorial.networking.*
+import com.staytuned.mo.tngptutorial.networking.PromotionDataResponse
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Callback
 
 class MainActivity : AppCompatActivity() {
 
-    private var promotion: List<PromotionDataResponse> = ArrayList()
+    private val promotion: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getAllPromotion()
-
-        //addPromotions()
+        addPromotions()
         setBalancePoint()
-        //setRecyclerView()
+        setRecyclerView()
 
         clickPromotion()
+        clickScanQR()
+        getAllPromotion()
+    }
+
+    private fun clickScanQR() {
+        btnScanQR.setOnClickListener {
+            val intent = Intent(applicationContext, ScanQRActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getAllPromotion(){
@@ -46,15 +50,8 @@ class MainActivity : AppCompatActivity() {
                 is Result.Success -> {
                     val data = result.get()
                     Log.d("armfluke", data)
-                    val pro = Klaxon().parseArray<PromotionDataResponse>(data)
-                    Log.d("armfluke", pro!![0].promotionName)
-                    //promotion = pro.toMutableList()
-                    //Log.d("armfluke", promotion!![0].promotionName)
-                    tvPromotionName.text = pro!![0].promotionName
-                    tvPromotionUsePoint.text = pro!![0].point.toString()
-                    //setRecyclerView(promotion)
-                    //rcvPromotionList.adapter?.notifyDataSetChanged()
-
+                    val promotion = Klaxon().parseArray<PromotionDataResponse>(data)
+                    Log.d("armfluke", promotion!![0].promotionName)
             }
             }
         }
@@ -77,9 +74,46 @@ class MainActivity : AppCompatActivity() {
         rcvPromotionList.adapter = PromotionAdapter(promotion, this)
     }
 
-    /*private fun addPromotions() {
-        promotion.add("หลวงพี่แจ๊ส 5G")
-        promotion.add("หลวงพี่แจ๊ส 6G")
-    }*/
+    private fun addPromotions() {
+        promotion.add("Avengers 1")
+        promotion.add("Avengers 2")
+        promotion.add("Avengers 3")
+        promotion.add("Avengers 4")
+        promotion.add("Avengers 5")
+        promotion.add("Avengers 6")
+        promotion.add("Avengers 7")
+        promotion.add("Avengers 8")
 
+    }
+
+    private fun loadService() {
+        /*RestAPI().create().getPromotion(object: Callback<List<PromotionDataResponse>> {
+            override fun success(call: Call<PromotionResponse>?, response: Response<PromotionResponse>?) {
+                if (response!!.isSuccessful) {
+                    Log.d("armfluke", "Successful!!!!!!")
+                    val promo = response.body()
+                    Log.d("armfluke", promo.toString())
+                }
+            }
+        })*/
+
+        /*override fun onFailure(call: Call<PromotionResponse>?, t: Throwable?) {
+            Log.d("armfluke", "Fail!!!!!!")
+            Log.d("armfluke", t.toString())
+        })*//*.enqueue(object : Callback<List<PromotionDataResponse>> {
+            override fun onResponse(call: Call<PromotionResponse>?, response: Response<PromotionResponse>?) {
+                if (response!!.isSuccessful) {
+                    Log.d("armfluke", "Successful!!!!!!")
+                    val promo = response.body()
+                    Log.d("armfluke", promo.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<PromotionResponse>?, t: Throwable?) {
+                Log.d("armfluke", "Fail!!!!!!")
+                Log.d("armfluke", t.toString())
+            }
+
+        })*/
+    }
 }
