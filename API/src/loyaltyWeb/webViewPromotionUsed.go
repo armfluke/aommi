@@ -16,7 +16,7 @@ type PromotionUsed struct {
 
 func WebViewPromotionUsed(w http.ResponseWriter, r *http.Request) {
 
-	//w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
 	database, error := sql.Open("mysql", "root:Admin123!@tcp(178.128.48.140:3306)/aommi")
 	if error != nil {
@@ -81,7 +81,7 @@ func WebViewPromotionUsed(w http.ResponseWriter, r *http.Request) {
 	message.WriteString(`
 	 <html>
 	 <body>
-	 <h3>Reprot History</h3>
+	 <h3>Report History</h3>
 	 <table>
 	   <tr>
 	 	<th>Account</th>
