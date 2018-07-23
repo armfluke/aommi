@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fbe2f0"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -18,15 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Coin"
-                android:textColor="#c2c2c2"
-                android:textStyle="normal" />
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
@@ -38,21 +32,46 @@
                     android:textSize="50sp"
                     android:textStyle="bold" />
                 <TextView
-                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tvBalancePoint"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="p."
-                    android:textColor="#c2c2c2"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
-            </LinearLayout>
+                    android:text="point"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/account_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#FCE4EC"
+                android:textStyle="normal" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:src="@drawable/pig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Redeem"
+            android:textSize="18sp"
+            android:textStyle="bold" />
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/relPromotion1"
             android:background="#fff"
             android:paddingRight="20dp"

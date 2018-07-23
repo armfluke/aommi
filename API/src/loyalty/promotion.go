@@ -17,6 +17,8 @@ type Promotion struct {
 	Condition     string `json:"condition"`
 	Point         int    `json:"point"`
 	Image         string `json:"image"`
+	Description   string `json:"description"`
+	LimitUse      int    `json:"limitUse"`
 }
 
 type PromotionUsed struct {
@@ -133,6 +135,10 @@ func GetPromotionFromDatabase() string {
 				data.Point, _ = strconv.Atoi(value)
 			case "Image":
 				data.Image = value
+			case "Description":
+				data.Description = value
+			case "LimitUse":
+				data.LimitUse, _ = strconv.Atoi(value)
 			}
 
 			if i == len(columns)-1 {
@@ -144,6 +150,8 @@ func GetPromotionFromDatabase() string {
 						Condition:     data.Condition,
 						Point:         data.Point,
 						Image:         data.Image,
+						Description:   data.Description,
+						LimitUse:      data.LimitUse,
 					})
 			}
 		}

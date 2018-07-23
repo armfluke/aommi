@@ -9,7 +9,9 @@ data class Promotion(
         val reward: String,
         val condition: String,
         val point: Int,
-        val image: String
+        val image: String,
+        val description: String,
+        val limitUse: Int
 ): Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
@@ -17,7 +19,9 @@ data class Promotion(
             parcel.readString(),
             parcel.readString(),
             parcel.readInt(),
-            parcel.readString()) {
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readInt()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -27,6 +31,8 @@ data class Promotion(
         parcel.writeString(condition)
         parcel.writeInt(point)
         parcel.writeString(image)
+        parcel.writeString(description)
+        parcel.writeInt(limitUse)
     }
 
     override fun describeContents(): Int {

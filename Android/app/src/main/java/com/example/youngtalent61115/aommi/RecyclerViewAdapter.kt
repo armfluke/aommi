@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.example.youngtalent61115.aommi.activity.RewardActivity
+import com.example.youngtalent61115.aommi.networking.Account
 import com.example.youngtalent61115.aommi.networking.Promotion
 
-class RecyclerViewAdapter(val mainActivity: MainActivity,val promotionList: ArrayList<Promotion>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(val mainActivity: MainActivity, val account: Account, val promotionList: ArrayList<Promotion>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.promotionName?.text = promotionList[position].promotionName
@@ -19,10 +20,11 @@ class RecyclerViewAdapter(val mainActivity: MainActivity,val promotionList: Arra
         holder?.description?.text = promotionList[position].condition
         holder?.coin?.text = promotionList[position].point.toString()
         holder?.redeemButton?.setOnClickListener{
-            Toast.makeText(mainActivity, "Clicked!!!", Toast.LENGTH_LONG).show()
+            //Toast.makeText(mainActivity, "Clicked!!!", Toast.LENGTH_LONG).show()
 
             val intent = Intent(mainActivity, RewardActivity::class.java)
-            intent.putExtra("promotion", promotionList)
+            intent.putExtra("account", account)
+            intent.putExtra("promotion", promotionList[position])
             startActivity(mainActivity ,intent, null)
         }
     }

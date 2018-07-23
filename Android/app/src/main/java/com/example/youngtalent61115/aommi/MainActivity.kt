@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.LinearLayout
 import com.beust.klaxon.Klaxon
 import com.example.youngtalent61115.aommi.activity.RewardActivity
+import com.example.youngtalent61115.aommi.networking.Account
 import com.example.youngtalent61115.aommi.networking.Promotion
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
@@ -21,30 +22,49 @@ import retrofit2.Callback
 
 class MainActivity : AppCompatActivity() {
 
-    private var promotion: List<PromotionDataResponse> = ArrayList()
+    //private val promotion: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getAllPromotion()
-
-        //addPromotions()
-        setBalancePoint()
-        //setRecyclerView()
-
-        //clickPromotion()
+        //setBalancePoint()
+        getAccount()
     }
 
-    fun createRecyclerView(promotion: ArrayList<Promotion>){
+    fun createRecyclerView(account: Account, promotion: ArrayList<Promotion>){
         val rv = findViewById<RecyclerView>(R.id.rcvPromotionList)
         rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
-        var adapter = RecyclerViewAdapter(this, promotion)
+        var adapter = RecyclerViewAdapter(this, account, promotion)
         rv.adapter = adapter
     }
 
-    private fun getAllPromotion(){
+    private fun getAccount(){
+        "http://10.0.2.2:3000/account".httpGet().responseString(){ request, response, result ->
+            //do something with response
+            when (result) {
+                is Result.Failure -> {
+                    val ex = result.getException()
+                    Log.d("armfluke", "Fail!!!")
+                    Log.d("armfluke", ex.toString())
+                }
+                is Result.Success -> {
+                    val data = result.get()
+                    Log.d("armfluke", "Success!!!")
+                    Log.d("armfluke", data)
+                    val account = ArrayList(Klaxon().parseArray<Account>(data))
+                    tvBalancePoint.text = account[0].pointBalance.toString()
+                    account_name.text = account[0].accountName
+
+                    getAllPromotion(account[0])
+                }
+            }
+        }
+        //AccountID, AccountName, PointBalance
+    }
+
+    private fun getAllPromotion(account: Account){
         //an extension over string (support GET, PUT, POST, DELETE with httpGet(), httpPut(), httpPost(), httpDelete())
         "http://10.0.2.2:3000/promotion".httpGet().responseString { request, response, result ->
             //do something with response
@@ -58,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                     val data = result.get()
                     Log.d("armfluke", "Success!!!")
                     Log.d("armfluke", data)
-                    createRecyclerView(ArrayList(Klaxon().parseArray<Promotion>(data)))
+                    createRecyclerView(account, ArrayList(Klaxon().parseArray<Promotion>(data)))
 
                 }
             }
@@ -78,14 +98,51 @@ class MainActivity : AppCompatActivity() {
         tvBalancePoint.text = "300"
     }
 
-    private fun setRecyclerView() {
-        rcvPromotionList.layoutManager = LinearLayoutManager(this)
-        rcvPromotionList.adapter = PromotionAdapter(promotion, this)
+//    private fun setRecyclerView() {
+//        rcvPromotionList.layoutManager = LinearLayoutManager(this)
+//        rcvPromotionList.adapter = PromotionAdapter(promotion, this)
+//    }
+//
+//    private fun addPromotions() {
+//        promotion.add("Avengers 1")
+//        promotion.add("Avengers 2")
+//        promotion.add("Avengers 3")
+//        promotion.add("Avengers 4")
+//        promotion.add("Avengers 5")
+//        promotion.add("Avengers 6")
+//        promotion.add("Avengers 7")
+//        promotion.add("Avengers 8")
+//
+//    }
+
+    private fun loadService() {
+        /*RestAPI().create().getPromotion(object: Callback<List<PromotionDataResponse>> {
+            override fun success(call: Call<PromotionResponse>?, response: Response<PromotionResponse>?) {
+                if (response!!.isSuccessful) {
+                    Log.d("armfluke", "Successful!!!!!!")
+                    val promo = response.body()
+                    Log.d("armfluke", promo.toString())
+                }
+            }
+        })*/
+
+        /*override fun onFailure(call: Call<PromotionResponse>?, t: Throwable?) {
+            Log.d("armfluke", "Fail!!!!!!")
+            Log.d("armfluke", t.toString())
+        })*//*.enqueue(object : Callback<List<PromotionDataResponse>> {
+            override fun onResponse(call: Call<PromotionResponse>?, response: Response<PromotionResponse>?) {
+                if (response!!.isSuccessful) {
+                    Log.d("armfluke", "Successful!!!!!!")
+                    val promo = response.body()
+                    Log.d("armfluke", promo.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<PromotionResponse>?, t: Throwable?) {
+                Log.d("armfluke", "Fail!!!!!!")
+                Log.d("armfluke", t.toString())
+            }
+
+        })*/
     }
-
-    /*private fun addPromotions() {
-        promotion.add("หลวงพี่แจ๊ส 5G")
-        promotion.add("หลวงพี่แจ๊ส 6G")
-    }*/
-
 }
