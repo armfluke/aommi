@@ -25,8 +25,9 @@ class ShowCodeRedeemActivity  : AppCompatActivity() {
     }
 
     fun usePromotion(account: Account, promotion: Promotion, redeemCode: String){
-        val body = "{\"accountID\":\"" + account.accountID + "\",promotionID\":" + promotion.promotionID + ",\"rewardCode\":" + redeemCode + "}"
-        "http://10.0.2.2:3000/promotion/use".httpPost().body(body).responseString{ request, response, result ->
+        val bodyPromotionUse = "{\"accountID\":\"" + account.accountID + "\",promotionID\":" + promotion.promotionID + ",\"rewardCode\":\"" + redeemCode + "\",\"pointBalance\":" + (account.pointBalance - promotion.point).toString() + "}"
+        //Log.d("armfluke", bodyPromotionUse)
+        "http://10.0.2.2:3000/promotion/use".httpPost().body(bodyPromotionUse).responseString{ request, response, result ->
             //do something with response
             when (result) {
                 is Result.Failure -> {
@@ -36,6 +37,25 @@ class ShowCodeRedeemActivity  : AppCompatActivity() {
                 }
                 is Result.Success -> {
                     val data = result.get()
+
+                    Log.d("armfluke", "Success!!!")
+                    Log.d("armfluke", data)
+                }
+            }
+        }
+
+        val bodyAccount = "{\"accountID\":\"" + account.accountID + "\",\"pointBalance\":" + (account.pointBalance - promotion.point).toString() + "}"
+        "http://10.0.2.2:3000/point/update".httpPost().body(bodyAccount).responseString{ request, response, result ->
+            //do something with response
+            when (result) {
+                is Result.Failure -> {
+                    val ex = result.getException()
+                    Log.d("armfluke", "Fail!!!")
+                    Log.d("armfluke", ex.toString())
+                }
+                is Result.Success -> {
+                    val data = result.get()
+
                     Log.d("armfluke", "Success!!!")
                     Log.d("armfluke", data)
                 }
