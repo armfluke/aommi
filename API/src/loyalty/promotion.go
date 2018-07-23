@@ -48,6 +48,8 @@ func UsePromotion(w http.ResponseWriter, r *http.Request) {
 	body := json.NewDecoder(r.Body)
 	body.Decode(&promotion)
 
+	//fmt.Println(promotion.AccountID)
+
 	db, err := sql.Open("mysql", "root:Admin123!@tcp(178.128.48.140:3306)/aommi")
 
 	if err != nil {
@@ -70,9 +72,11 @@ func UsePromotion(w http.ResponseWriter, r *http.Request) {
 	}
 
 	message := Status{StatusCode: 200, Status: "ok"}
-
-	encoder := json.NewEncoder(w)
-	encoder.Encode(message)
+	res, _ := json.Marshal(message)
+	fmt.Println(string(res))
+	w.Write([]byte(string(res)))
+	// encoder := json.NewEncoder(w)
+	// encoder.Encode(message)
 }
 
 func GetPromotionFromDatabase() string {

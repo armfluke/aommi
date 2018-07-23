@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         relPromotion1.setOnClickListener {
             //to detail
             val intent = Intent(applicationContext, RewardActivity::class.java)
+            intent.putExtra("PROMOTION_ID","")
             startActivity(intent)
         }
     }

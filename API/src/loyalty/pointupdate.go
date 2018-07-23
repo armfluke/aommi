@@ -18,7 +18,6 @@ func UpdatePoint(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var decreasepoint PointUpdate
-
 	body := json.NewDecoder(r.Body)
 	body.Decode(&decreasepoint)
 
