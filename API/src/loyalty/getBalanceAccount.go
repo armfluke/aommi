@@ -2,6 +2,7 @@ package loyalty
 
 import (
 	"database/sql"
+	"fmt"
 )
 
 func GetBalanceAccount(account string) (int,bool){
@@ -12,8 +13,8 @@ func GetBalanceAccount(account string) (int,bool){
 	}
 
 	defer db.Close()
-
-	rows, error := db.Query("SELECT PointBalance FROM account")
+	queryString := fmt.Sprintf("SELECT PointBalance FROM account WHERE AccountID='%s'",account)
+	rows, error := db.Query(queryString)
 	if err := rows.Err(); err != nil {
 		return -1,false
 	}
