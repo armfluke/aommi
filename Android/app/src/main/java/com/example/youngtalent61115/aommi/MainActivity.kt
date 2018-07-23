@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun clickScanQR() {
         btnScanQR.setOnClickListener {
-
+            val intent = Intent(applicationContext, ScanQRActivity::class.java)
+            startActivity(intent)
         }
     }
 
