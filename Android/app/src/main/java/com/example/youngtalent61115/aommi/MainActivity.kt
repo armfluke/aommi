@@ -4,10 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import com.beust.klaxon.Klaxon
 import com.example.youngtalent61115.aommi.activity.RewardActivity
+import com.example.youngtalent61115.aommi.networking.Promotion
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import com.staytuned.mo.tngptutorial.networking.*
@@ -30,7 +33,15 @@ class MainActivity : AppCompatActivity() {
         setBalancePoint()
         //setRecyclerView()
 
-        clickPromotion()
+        //clickPromotion()
+    }
+
+    fun createRecyclerView(promotion: ArrayList<Promotion>){
+        val rv = findViewById<RecyclerView>(R.id.rcvPromotionList)
+        rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+
+        var adapter = RecyclerViewAdapter(this, promotion)
+        rv.adapter = adapter
     }
 
     private fun getAllPromotion(){
@@ -45,17 +56,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 is Result.Success -> {
                     val data = result.get()
+                    Log.d("armfluke", "Success!!!")
                     Log.d("armfluke", data)
-                    val pro = Klaxon().parseArray<PromotionDataResponse>(data)
-                    Log.d("armfluke", pro!![0].promotionName)
-                    //promotion = pro.toMutableList()
-                    //Log.d("armfluke", promotion!![0].promotionName)
-                    tvPromotionName.text = pro!![0].promotionName
-                    tvPromotionUsePoint.text = pro!![0].point.toString()
-                    //setRecyclerView(promotion)
-                    //rcvPromotionList.adapter?.notifyDataSetChanged()
+                    createRecyclerView(ArrayList(Klaxon().parseArray<Promotion>(data)))
 
-            }
+                }
             }
         }
     }

@@ -35,8 +35,6 @@ func GetPromotion(w http.ResponseWriter, r *http.Request) {
 
 	message := GetPromotionFromDatabase()
 
-	fmt.Println("Request Get")
-
 	w.Write([]byte(message))
 }
 

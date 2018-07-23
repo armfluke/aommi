@@ -14,7 +14,6 @@ func main() {
 	http.HandleFunc("/promotion", loyalty.GetPromotion)
 	http.HandleFunc("/promotion/use", loyalty.UsePromotion)
 	http.HandleFunc("/point/update", loyalty.UpdatePoint)
-
 	http.HandleFunc("/web/account", loyaltyWeb.WebViewAccount)
 	http.HandleFunc("/web/promotionused", loyaltyWeb.WebViewPromotionUsed)
 
