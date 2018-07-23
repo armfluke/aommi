@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".activity.RewardActivity" />
         <activity android:name=".activity.ShowCodeRedeemActivity" />
-        <activity android:name=".ScanQRActivity"></activity>
+        <activity android:name=".activity.ScanQRActivity"></activity>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.beust.klaxon.Klaxon
 import com.example.youngtalent61115.aommi.activity.RewardActivity
+import com.example.youngtalent61115.aommi.activity.ScanQRActivity
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import com.staytuned.mo.tngptutorial.networking.PromotionDataResponse
