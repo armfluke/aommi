@@ -44,11 +44,8 @@ func UsePromotion(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var promotion PromotionUsed
-
 	body := json.NewDecoder(r.Body)
 	body.Decode(&promotion)
-
-	//fmt.Println(promotion.AccountID)
 
 	db, err := sql.Open("mysql", "root:Admin123!@tcp(178.128.48.140:3306)/aommi")
 
@@ -61,8 +58,8 @@ func UsePromotion(w http.ResponseWriter, r *http.Request) {
 
 	defer db.Close()
 
-	results, err := db.Query("INSERT INTO promotionUsed (accountID, promotionID, rewardCode) VALUES ('" + promotion.AccountID + "'," + strconv.Itoa(promotion.PromotionID) + ",'" + promotion.RewardCode + "')")
-	results.Close()
+	resultsInsert, err := db.Query("INSERT INTO promotionUsed (accountID, promotionID, rewardCode) VALUES ('" + promotion.AccountID + "'," + strconv.Itoa(promotion.PromotionID) + ",'" + promotion.RewardCode + "')")
+	resultsInsert.Close()
 
 	if err != nil {
 		message := Status{StatusCode: 500, Status: "Can't insert to database"}

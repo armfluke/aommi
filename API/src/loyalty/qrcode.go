@@ -27,9 +27,11 @@ func ScanQrCode(w http.ResponseWriter, r *http.Request) {
 	//to do
 	checkStatus := CheckQRCode(postBodyQR.QRCode)
 	if checkStatus {
-		//to do UpdatePointByQR(postBodyQR.QRCode,
-		//  postBodyQR.AccountID)
-		responseQR = MessageQR{BalancePoint: 200, QrPoint: 200}
+		resultBalance, resultQRPoint, status := UpdatePointByQR(postBodyQR.QRCode,
+			postBodyQR.AccountID)
+		if status {
+			responseQR = MessageQR{BalancePoint: resultBalance, QrPoint: resultQRPoint}
+		}
 	} else {
 		responseQR = MessageQR{BalancePoint: 0, QrPoint: 0}
 	}
