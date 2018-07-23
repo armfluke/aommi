@@ -71,8 +71,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addPromotions() {
-        promotion.add("หลวงพี่แจ๊ส 5G")
-        promotion.add("หลวงพี่แจ๊ส 6G")
+        promotion.add("Avengers 1")
+        promotion.add("Avengers 2")
+        promotion.add("Avengers 3")
+        promotion.add("Avengers 4")
+        promotion.add("Avengers 5")
+        promotion.add("Avengers 6")
+        promotion.add("Avengers 7")
+        promotion.add("Avengers 8")
+
     }
 
     private fun loadService() {
