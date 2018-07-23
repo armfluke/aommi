@@ -4,54 +4,66 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.example.youngtalent61115.aommi.R
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_reward.*
-import java.util.*
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
-import android.widget.Toast
-import com.example.youngtalent61115.aommi.MainActivity
-
+import com.example.youngtalent61115.aommi.networking.Account
+import com.example.youngtalent61115.aommi.networking.Promotion
 
 
 class RewardActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reward)
-        clickRedeem()
+
+        val promotion = intent.getParcelableExtra<Promotion>("promotion")
+        val account = intent.getParcelableExtra<Account>("account")
+
+        name_promotion.text = promotion.promotionName
+        piont_for_redeem.text = promotion.point.toString() + " coins"
+        condition_promotion.text = promotion.condition
+        detail_promotion.text = promotion.description
+        limit_use.text = "Limit: " + promotion.limitUse.toString() + " privilege"
+
+        clickRedeem(account, promotion)
 
     }
 
-    private fun clickRedeem() {
+    private fun clickRedeem(account: Account, promotion: Promotion) {
         btn_redeem.setOnClickListener {
             //to detail
             val builder = AlertDialog.Builder(this@RewardActivity)
-            val poinForRedeem = decreasePoint(1000,100)
-            var messageForSucces = ""
-            var redeemCode = "None code"
-            if(poinForRedeem >= 0){
-                messageForSucces = "คุณได้ทำการใช้คอยน์เพื่อแลกบัตรดูหนังในเครือเมเจอร์ " + poinForRedeem.toString()+" coin"
-                redeemCode = generateCode(8)
+            val pointForRedeem = decreasePoint(account.pointBalance, promotion.point)
+            var messageForSuccess = ""
+            var redeemCode = ""
+            if(pointForRedeem >= 0){
+                messageForSuccess = "คุณได้ทำการใช้คอยน์สำหรับ " + promotion.promotionName+ " เป็นจำนวน " + promotion.point.toString()+ " coins คงเหลือ " + pointForRedeem.toString() + " coins"
+                redeemCode = generateCode(9)
+
+                builder.setPositiveButton("ยืนยัน", DialogInterface.OnClickListener { dialog, id ->
+                    val intent = Intent(applicationContext, ShowCodeRedeemActivity::class.java)
+                    intent.putExtra("redeemCode", redeemCode)
+                    intent.putExtra("promotion", promotion)
+                    intent.putExtra("account", account)
+                    startActivity(intent)
+                })
+
+                builder.setNegativeButton("ยกเลิก") { dialog, id ->
+                    dialog.cancel()
+                }
+
             }else {
-                messageForSucces = "ขออภัย จำนวนพอยต์ของคุณไม่พอ"
+                messageForSuccess = "ขออภัย จำนวนพอยต์ของคุณไม่พอ"
+
+                builder.setNegativeButton("ยืนยัน", DialogInterface.OnClickListener { dialog, id ->
+                    dialog.cancel()
+                })
             }
-            builder.setMessage(messageForSucces)
-            builder.setPositiveButton("ยืนยัน", DialogInterface.OnClickListener { dialog, id -> finish(
-
-            )
-                val intent = Intent(applicationContext, ShowCodeRedeemActivity::class.java)
-
-                intent.putExtra("RedeemCode",redeemCode)
-                startActivity(intent)
-            })
-
-
-            builder.setNegativeButton("ยกเลิก") { dialog, id -> dialog.cancel()
-                //dialog.dismiss();
-            }
+            builder.setMessage(messageForSuccess)
             builder.setTitle("Redeem")
 
             builder.show()
+
         }
     }
     fun decreasePoint(currentBalance: Int, decreasePoint: Int): Int {

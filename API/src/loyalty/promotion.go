@@ -3,6 +3,7 @@ package loyalty
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -16,6 +17,8 @@ type Promotion struct {
 	Condition     string `json:"condition"`
 	Point         int    `json:"point"`
 	Image         string `json:"image"`
+	Description   string `json:"description"`
+	LimitUse      int    `json:"limitUse"`
 }
 
 type PromotionUsed struct {
@@ -45,6 +48,8 @@ func UsePromotion(w http.ResponseWriter, r *http.Request) {
 	body := json.NewDecoder(r.Body)
 	body.Decode(&promotion)
 
+	//fmt.Println(promotion.AccountID)
+
 	db, err := sql.Open("mysql", "root:Admin123!@tcp(178.128.48.140:3306)/aommi")
 
 	if err != nil {
@@ -67,9 +72,11 @@ func UsePromotion(w http.ResponseWriter, r *http.Request) {
 	}
 
 	message := Status{StatusCode: 200, Status: "ok"}
-
-	encoder := json.NewEncoder(w)
-	encoder.Encode(message)
+	res, _ := json.Marshal(message)
+	fmt.Println(string(res))
+	w.Write([]byte(string(res)))
+	// encoder := json.NewEncoder(w)
+	// encoder.Encode(message)
 }
 
 func GetPromotionFromDatabase() string {
@@ -128,6 +135,10 @@ func GetPromotionFromDatabase() string {
 				data.Point, _ = strconv.Atoi(value)
 			case "Image":
 				data.Image = value
+			case "Description":
+				data.Description = value
+			case "LimitUse":
+				data.LimitUse, _ = strconv.Atoi(value)
 			}
 
 			if i == len(columns)-1 {
@@ -139,6 +150,8 @@ func GetPromotionFromDatabase() string {
 						Condition:     data.Condition,
 						Point:         data.Point,
 						Image:         data.Image,
+						Description:   data.Description,
+						LimitUse:      data.LimitUse,
 					})
 			}
 		}
