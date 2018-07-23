@@ -17,13 +17,15 @@ func GetBalanceAccount(account string) (int,bool){
 	if err := rows.Err(); err != nil {
 		return -1,false
 	}
-	var balance int
-	for rows.Next() {
+	balance := 0
+	if rows.Next() {
 		if err := rows.Scan(&balance); err != nil {
 			return -1,false	
 		}
+		return balance,true
+	}else{
+		return balance,false
 	}
 	rows.Close()
-	
-	return balance,true
+	return balance,false	
 }

@@ -6,18 +6,16 @@ import (
 
 func UpdatePointByQR(qr string, account string) (int,int,bool){
 
-	pointqr,error := GetPointQR(qr)
+	pointqr,status := GetPointQR(qr)
 	resultbalance := 0
-	if !error {
+	if !status {
 		return 0,0,false
 	}
-	accountbalance,error := GetBalanceAccount(account)
-	if !error {
+	accountbalance,status := GetBalanceAccount(account)
+	if !status {
 		return 0,0,false
 	}
-	if accountbalance>=pointqr {
-		resultbalance = accountbalance-pointqr
-	}
+	resultbalance = accountbalance+pointqr
 	if updatePointToDatabase(resultbalance,account){
 		return accountbalance,pointqr,true
 	}else {
