@@ -121,6 +121,9 @@ newman run filename
 ## Version 
 
 ## Deploy on server
+#Server port
+3001
+
 #Login to server
 1. ssh root@178.128.48.140
 2. password: lpk,=eokPdb0
