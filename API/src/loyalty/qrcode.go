@@ -5,17 +5,35 @@ import (
 	"net/http"
 )
 
-type Message struct {
-	BalancePoint int `json:"balancePoint"`
-	QrPoint int `json:"qrPoint"`
+type PostBodyQR struct {
+	QRCode    string `json:"qrCode"`
+	AccountID string `json:"accountID"`
 }
 
-func ScanQrCode(w http.ResponseWriter, r *http.Request) {	
-	
-	bodyPoint := Message{BalancePoint: 150,QrPoint: 150}
-	
+type MessageQR struct {
+	BalancePoint int `json:"balancePoint"`
+	QrPoint      int `json:"qrPoint"`
+}
 
+func ScanQrCode(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+
+	var postBodyQR PostBodyQR
+	var responseQR MessageQR
+
+	body := json.NewDecoder(r.Body)
+	body.Decode(&postBodyQR)
+
+	//to do
+	checkStatus := CheckQRCode(postBodyQR.QRCode)
+	if checkStatus {
+		//to do UpdatePointByQR(postBodyQR.QRCode,
+		//  postBodyQR.AccountID)
+		responseQR = MessageQR{BalancePoint: 200, QrPoint: 200}
+	} else {
+		responseQR = MessageQR{BalancePoint: 0, QrPoint: 0}
+	}
+
 	encoder := json.NewEncoder(w)
-	encoder.Encode(bodyPoint)
+	encoder.Encode(responseQR)
 }
