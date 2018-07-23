@@ -12,13 +12,11 @@ import com.beust.klaxon.Klaxon
 import com.example.youngtalent61115.aommi.activity.RewardActivity
 import com.example.youngtalent61115.aommi.networking.Account
 import com.example.youngtalent61115.aommi.networking.Promotion
+import com.example.youngtalent61115.aommi.activity.ScanQRActivity
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
-import com.staytuned.mo.tngptutorial.networking.*
+import com.staytuned.mo.tngptutorial.networking.PromotionDataResponse
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Callback
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         //setBalancePoint()
         getAccount()
+        clickScanQR()
     }
 
     fun createRecyclerView(account: Account, promotion: ArrayList<Promotion>){
@@ -62,6 +61,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         //AccountID, AccountName, PointBalance
+    }
+
+    private fun clickScanQR() {
+        btnScanQR.setOnClickListener {
+            val intent = Intent(applicationContext, ScanQRActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getAllPromotion(account: Account){
