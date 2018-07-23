@@ -119,3 +119,30 @@ newman run filename
 [See more git and go command](https://github.com/ImKK-000/git-and-go-step)
 
 ## Version 
+
+## Deploy on server
+#Server port
+3001
+
+#Login to server
+1. ssh root@178.128.48.140
+2. password: lpk,=eokPdb0
+
+#go location
+/usr/local/go/bin
+
+#project location
+root/bootcamp/aommi/aommi/API
+
+#set GOPATH
+cd /bootcamp/aommi/aommi/API
+
+#Build and run
+1. go build -o aommi src/main.go
+2. ./aommi &
+
+#Check process and kill
+1. fg #check running background
+2. ps aux | grep aommi #get process id
+3. kill PROCESS_ID
+
