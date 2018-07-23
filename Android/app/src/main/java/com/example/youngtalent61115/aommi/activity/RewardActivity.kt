@@ -45,6 +45,7 @@ class RewardActivity : AppCompatActivity(){
                     intent.putExtra("redeemCode", redeemCode)
                     intent.putExtra("promotion", promotion)
                     intent.putExtra("account", account)
+                    this.finish()
                     startActivity(intent)
                 })
 
