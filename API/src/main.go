@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/qrcode", loyalty.GetQRCode)
 
 	http.HandleFunc("/account", loyalty.GetAccount)
 	http.HandleFunc("/promotion", loyalty.GetPromotion)
