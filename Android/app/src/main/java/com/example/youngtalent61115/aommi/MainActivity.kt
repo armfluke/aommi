@@ -25,8 +25,14 @@ class MainActivity : AppCompatActivity() {
         setRecyclerView()
 
         clickPromotion()
-
+        clickScanQR()
         getAllPromotion()
+    }
+
+    private fun clickScanQR() {
+        btnScanQR.setOnClickListener {
+
+        }
     }
 
     private fun getAllPromotion(){
