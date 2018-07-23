@@ -1,5 +1,6 @@
 package com.example.youngtalent61115.aommi.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -35,6 +36,9 @@ class ScanQRActivity : AppCompatActivity() {
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
                 //Open ShowPoint
+                val intent = Intent(applicationContext, ShowPointActivity::class.java)
+                startActivity(intent)
+                this.finish()
                 Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
             }
         }
