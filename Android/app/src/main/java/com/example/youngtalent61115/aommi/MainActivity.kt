@@ -5,16 +5,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.view.View
 import com.beust.klaxon.Klaxon
 import com.example.youngtalent61115.aommi.activity.RewardActivity
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
-import com.staytuned.mo.tngptutorial.networking.*
+import com.staytuned.mo.tngptutorial.networking.PromotionDataResponse
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Callback
 
 class MainActivity : AppCompatActivity() {
 
