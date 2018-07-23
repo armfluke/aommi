@@ -34,6 +34,19 @@ func GetQRCode(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func CheckQRCode(qrCode string) bool {
+	if qrCode != "" {
+		message := GetQRCodeFromDatabase(qrCode)
+		if message == qrCode {
+			return true
+		} else {
+			return false
+		}
+	} else {
+		return false
+	}
+}
+
 func GetAllQRCodeFromDatabase() string {
 	log.Println("Go to QRCode")
 
@@ -179,6 +192,9 @@ func GetQRCodeFromDatabase(key string) string {
 		return ""
 	}
 
-	arrQRCode, _ := json.Marshal(qrcode)
-	return string(arrQRCode)
+	if qrcode != nil {
+		return qrcode[0].CodeName
+	} else {
+		return ""
+	}
 }
