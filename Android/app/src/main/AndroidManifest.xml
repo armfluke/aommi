@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".activity.RewardActivity" />
         <activity android:name=".activity.ShowCodeRedeemActivity" />
+        <activity android:name=".activity.ShowPointActivity" />
         <activity android:name=".activity.ScanQRActivity"></activity>
     </application>
 
