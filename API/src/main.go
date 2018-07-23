@@ -3,12 +3,15 @@ package main
 import (
 	"log"
 	"loyalty"
-	"net/http"
 	"loyaltyWeb"
+	"net/http"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
+	http.HandleFunc("/qrcode", loyalty.GetQRCode)
+
 	http.HandleFunc("/account", loyalty.GetAccount)
 	http.HandleFunc("/promotion", loyalty.GetPromotion)
 	http.HandleFunc("/promotion/use", loyalty.UsePromotion)
