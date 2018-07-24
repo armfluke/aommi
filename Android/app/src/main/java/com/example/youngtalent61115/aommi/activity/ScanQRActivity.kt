@@ -1,5 +1,6 @@
 package com.example.youngtalent61115.aommi.activity
 
+import android.accounts.Account
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -20,8 +21,10 @@ class ScanQRActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_qr)
 
+        val account = intent.getParcelableExtra<Account>("account")
+
         setScannerProperties()
-        callbackFromScanner()
+        callbackFromScanner(account)
 
         clickScannerToContinual()
     }
@@ -32,11 +35,13 @@ class ScanQRActivity : AppCompatActivity() {
         }
     }
 
-    private fun callbackFromScanner() {
+    private fun callbackFromScanner(account: Account) {
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
                 //Open ShowPoint
                 val intent = Intent(applicationContext, ShowPointActivity::class.java)
+                intent.putExtra("account", account)
+                intent.putExtra("qrCode", it.text)
                 startActivity(intent)
                 this.finish()
                 Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()

@@ -16,7 +16,7 @@ func Test_CheckQRCode_Input_qr_200savingaccount_and_account1969900224728_Should_
 	if actual_balance != expected_balance || actual_point != expected_point {
 		t.Errorf("expect '%d %d' but got '%d %d'", expected_balance, expected_point, actual_balance, actual_point)
 	}
-} 
+}
 
 func Test_GetQRCodeFromDatabase_Input_qr_200savingaccount_and_account1969900224728_Should_Be_Banlance_and_point(t *testing.T) {
 	qrCode := "200|saving_account"
