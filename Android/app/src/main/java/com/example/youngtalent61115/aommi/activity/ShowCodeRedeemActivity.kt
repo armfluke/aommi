@@ -3,7 +3,6 @@ package com.example.youngtalent61115.aommi.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.beust.klaxon.Klaxon
 import com.example.youngtalent61115.aommi.GlobalVariable
 import com.example.youngtalent61115.aommi.R
 import com.example.youngtalent61115.aommi.networking.Account
@@ -11,6 +10,8 @@ import com.example.youngtalent61115.aommi.networking.Promotion
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.result.Result
 import kotlinx.android.synthetic.main.activity_show_code_redeem.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ShowCodeRedeemActivity  : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +24,25 @@ class ShowCodeRedeemActivity  : AppCompatActivity() {
         val account = intent.getParcelableExtra<Account>("account")
 
         usePromotion(account, promotion, redeemCode)
+        setDateQRCode()
+        clickCancel()
+    }
+
+    private fun clickCancel() {
+        btn_cancel.setOnClickListener {
+            this.finish()
+        }
+    }
+
+    private fun setDateQRCode(){
+        txt_date.text = getCurrentDateTime()
+    }
+    private fun getCurrentDateTime(): String{
+        val cal = Calendar.getInstance()
+        val date = cal.time
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val formattedDate = dateFormat.format(date)
+        return  formattedDate
     }
 
     fun usePromotion(account: Account, promotion: Promotion, redeemCode: String){

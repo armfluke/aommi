@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.LinearLayout
 import com.beust.klaxon.Klaxon
-import com.example.youngtalent61115.aommi.activity.RewardActivity
 import com.example.youngtalent61115.aommi.networking.Account
 import com.example.youngtalent61115.aommi.networking.Promotion
 import com.example.youngtalent61115.aommi.activity.ScanQRActivity
