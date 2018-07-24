@@ -14,7 +14,13 @@ func Test_Get_Promotion_Should_Return_All_Promotion(t *testing.T) {
 	r, _ := http.NewRequest(http.MethodGet, "/promotion", nil)
 	w := httptest.NewRecorder()
 
-	GetPromotion(w, r)
+	stubGetPromotionFromDatabase := func() string{
+		return expected
+	}
+
+	product := Product{stubGetPromotionFromDatabase}
+
+	product.ServeHTTP(w, r)
 
 	resp := w.Result()
 	body, _ := ioutil.ReadAll(resp.Body)
