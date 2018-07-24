@@ -10,11 +10,13 @@ import (
 )
 
 func main() {
-
-	http.Handle("/account", loyalty.Customer{loyalty.GetAccountFromDatabase})
-	http.Handle("/promotion", loyalty.Product{loyalty.GetPromotionFromDatabase})
+	http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir("loyaltyWeb/"))))
+	http.HandleFunc("/account", loyalty.GetAccount)
+	http.HandleFunc("/account/history", loyalty.GetHistory)
+	http.HandleFunc("/promotion", loyalty.GetPromotion)
 	http.HandleFunc("/promotion/use", loyalty.UsePromotion)
 	http.HandleFunc("/point/update", loyalty.UpdatePoint)
+	
 	http.HandleFunc("/web/account", loyaltyWeb.WebViewAccount)
 	http.HandleFunc("/web/promotionused", loyaltyWeb.WebViewPromotionUsed)
 	http.HandleFunc("/qr", loyalty.ScanQrCode)

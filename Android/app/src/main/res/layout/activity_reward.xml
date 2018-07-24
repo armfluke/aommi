@@ -4,9 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <RelativeLayout
+        android:id="@+id/promotionBackground"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="200dp">
+        <ImageView
+            android:id="@+id/promotionImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
     <LinearLayout
