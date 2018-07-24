@@ -1,8 +1,6 @@
 package loyalty
 
 import (
-	"database/sql"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -27,8 +25,8 @@ func CheckQRCode(qrCode string) bool {
 }
 
 func GetQRCodeFromDatabase(key string) string {
-	db, err := sql.Open("mysql", "root:Admin123!@tcp(178.128.48.140:3306)/aommi")
-	if err != nil {
+	db := ConnectDatabase()
+	if db == nil {
 		return ""
 	}
 	defer db.Close()

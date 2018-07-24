@@ -131,11 +131,15 @@ newman run filename
 #go location
 /usr/local/go/bin
 
+#Add go to path
+export PATH=$PATH:/usr/local/go/bin
+
 #project location
 root/bootcamp/aommi/aommi/API
 
 #set GOPATH
 cd /bootcamp/aommi/aommi/API
+export GOPATH=`pwd`
 
 #Build and run
 1. go build -o aommi src/main.go

@@ -19,12 +19,15 @@ class ShowPointActivity : AppCompatActivity(){
         setContentView(R.layout.activity_show_point)
 
         val account = intent.getParcelableExtra<Account>("account")
-        val qrCode = intent.getStringExtra("qrCode")
+        //val qrCode = intent.getStringExtra("qrCode")
+        val qrPoint = intent.getIntExtra("qrPoint", 0)
+
+        txt_show_receive_point.text = qrPoint.toString()
+        txt_show_balance_point.text = (account.pointBalance + qrPoint).toString()
 
         clickAccecpt()
         setDateQRCode()
-        requestToUpdatePoint(account, qrCode)
-
+        //requestToUpdatePoint(account, qrCode)
     }
     private fun clickAccecpt(){
 
@@ -50,23 +53,23 @@ class ShowPointActivity : AppCompatActivity(){
         return  formattedDate
     }
 
-    private fun requestToUpdatePoint(account: Account, qrCode: String){
-        val body = "{\"qrCode\":\"${qrCode}\",\"accountID\":\"${account.accountID}\"}"
-        "${GlobalVariable.baseUrl}/qr".httpPost().body(body).responseString{ request, response, result ->
-            //do something with response
-            when (result) {
-                is Result.Failure -> {
-                    val ex = result.getException()
-                    Log.d("armfluke", "Fail!!!")
-                    Log.d("armfluke", ex.toString())
-                }
-                is Result.Success -> {
-                    val data = result.get()
-
-                    Log.d("armfluke", "Success!!!")
-                    Log.d("armfluke", data)
-                }
-            }
-        }
-    }
+//    private fun requestToUpdatePoint(account: Account, qrCode: String){
+//        val body = "{\"qrCode\":\"${qrCode}\",\"accountID\":\"${account.accountID}\"}"
+//        "${GlobalVariable.baseUrl}/qr".httpPost().body(body).responseString{ request, response, result ->
+//            //do something with response
+//            when (result) {
+//                is Result.Failure -> {
+//                    val ex = result.getException()
+//                    Log.d("armfluke", "Fail!!!")
+//                    Log.d("armfluke", ex.toString())
+//                }
+//                is Result.Success -> {
+//                    val data = result.get()
+//
+//                    Log.d("armfluke", "Success!!!")
+//                    Log.d("armfluke", data)
+//                }
+//            }
+//        }
+//    }
 }

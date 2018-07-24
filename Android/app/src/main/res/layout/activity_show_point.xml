@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txt_show_receive_point"
             android:textSize="100sp"
-            android:text="50"
+            android:text="0"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"/>
     </LinearLayout>
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txt_show_balance_point"
-        android:text="300"
+        android:text="0"
         android:textSize="75sp"
         android:gravity="center"/>
 
