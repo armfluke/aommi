@@ -5,20 +5,12 @@ import (
 	"html/template"
 	"fmt"
 	. "loyalty"
+	"log"
 )
 
-type Customers struct {
-	AccountID   string    
-	AccountName string 
-	PointBalance string
-	SavingAccount bool
-	FixedAccount bool    
-}
-type DataToPage struct {
-	CustomerList []Customers 
-}
-func WebViewAccount(w http.ResponseWriter, r *http.Request) {
-
+func ResetAccount(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()                     // Parses the request body
+    
 	tmpl := template.Must(template.ParseFiles("loyaltyWeb/webViewAccount.html"))
 	database := ConnectDatabase()
 	if database == nil {
@@ -26,7 +18,21 @@ func WebViewAccount(w http.ResponseWriter, r *http.Request) {
 		return 
 	}
 	defer database.Close()
-
+	typeAccount := r.Form.Get("typeaccount")
+	accountReset := r.Form.Get("account")
+	queryString := ""
+	if typeAccount=="Saving"{
+		queryString = "UPDATE account set SavingAccount=0 WHERE AccountID=?"
+	}else if typeAccount=="Fixed"{
+		queryString = "UPDATE account set FixedAccount=0 WHERE AccountID=?"
+	} 
+	_,error := database.Exec(queryString,accountReset)
+	if error != nil {
+		log.Println(error)
+		fmt.Fprintf(w,"Error Reset")
+		return
+	}
+	
 	rows, error := database.Query("SELECT AccountID,AccountName,PointBalance,SavingAccount,FixedAccount FROM account")
 	if error != nil {
 		fmt.Fprintf(w,"Error Query")
@@ -56,3 +62,4 @@ func WebViewAccount(w http.ResponseWriter, r *http.Request) {
 	}
 	tmpl.Execute(w, data)
 }
+	
