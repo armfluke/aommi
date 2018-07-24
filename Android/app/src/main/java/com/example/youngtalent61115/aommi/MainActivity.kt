@@ -16,6 +16,10 @@ import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.result.Result
 import kotlinx.android.synthetic.main.activity_main.*
 
+object GlobalVariable {
+    val baseUrl = "http://178.128.48.140:3001"
+}
+
 class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
@@ -23,25 +27,23 @@ class MainActivity : AppCompatActivity() {
         getAccount()
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         getAccount()
-        clickScanQR()
     }
 
-    fun createRecyclerView(account: Account, promotion: ArrayList<Promotion>){
+    fun createRecyclerView(account: Account, promotion: ArrayList<Promotion>) {
         val rv = findViewById<RecyclerView>(R.id.rcvPromotionList)
-        rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
 
         var adapter = RecyclerViewAdapter(this, account, promotion)
         rv.adapter = adapter
     }
 
-    private fun getAccount(){
-        "http://10.0.2.2:3000/account".httpGet().responseString(){ request, response, result ->
+    private fun getAccount() {
+        "${GlobalVariable.baseUrl}/account".httpGet().responseString() { request, response, result ->
             //do something with response
             when (result) {
                 is Result.Failure -> {
@@ -56,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                     val account = ArrayList(Klaxon().parseArray<Account>(data))
                     setBalancePointAndAccountName(account)
                     getAllPromotion(account[0])
+                    clickScanQR(account[0])
                 }
             }
         }
@@ -67,16 +70,17 @@ class MainActivity : AppCompatActivity() {
         account_name.text = account[0].accountName
     }
 
-    private fun clickScanQR() {
+    private fun clickScanQR(account: Account) {
         btnScanQR.setOnClickListener {
             val intent = Intent(applicationContext, ScanQRActivity::class.java)
+            intent.putExtra("account", account)
             startActivity(intent)
         }
     }
 
-    private fun getAllPromotion(account: Account){
+    private fun getAllPromotion(account: Account) {
         //an extension over string (support GET, PUT, POST, DELETE with httpGet(), httpPut(), httpPost(), httpDelete())
-        "http://10.0.2.2:3000/promotion".httpGet().responseString { request, response, result ->
+        "${GlobalVariable.baseUrl}/promotion".httpGet().responseString { request, response, result ->
             //do something with response
             when (result) {
                 is Result.Failure -> {

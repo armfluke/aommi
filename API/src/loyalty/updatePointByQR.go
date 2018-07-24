@@ -7,11 +7,20 @@ func UpdatePointByQR(qr string, account string) (int, int, bool) {
 	if !status {
 		return 0, 0, false
 	}
-	accountbalance, status := GetBalanceAccount(account)
+	accountBalance, status := GetBalanceAccount(account)
 	if !status {
 		return 0, 0, false
 	}
-	resultbalance = accountbalance + pointqr
+	status = IsUseQR(account, qr)
+	if !status {
+		return 0, 0, false
+	}
+	status = SetUseQR(account, qr, pointqr)
+	if !status {
+		return 0, 0, false
+	}
+
+	resultbalance = accountBalance + pointqr
 	if updatePointToDatabase(resultbalance, account) {
 		return resultbalance, pointqr, true
 	} else {

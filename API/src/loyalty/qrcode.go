@@ -24,7 +24,6 @@ func ScanQrCode(w http.ResponseWriter, r *http.Request) {
 	body := json.NewDecoder(r.Body)
 	body.Decode(&postBodyQR)
 
-	//to do
 	checkStatus := CheckQRCode(postBodyQR.QRCode)
 	if checkStatus {
 		resultBalance, resultQRPoint, status := UpdatePointByQR(postBodyQR.QRCode,
