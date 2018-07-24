@@ -1,6 +1,6 @@
 package com.example.youngtalent61115.aommi.activity
 
-import android.accounts.Account
+
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +11,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.example.youngtalent61115.aommi.R
+import com.example.youngtalent61115.aommi.networking.Account
 import kotlinx.android.synthetic.main.activity_scan_qr.*
 
 class ScanQRActivity : AppCompatActivity() {
