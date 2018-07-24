@@ -16,7 +16,10 @@ type Account struct {
 	PointBalance int    `json:"pointBalance"`
 }
 
-func GetAccount(w http.ResponseWriter, r *http.Request) {
+type Customer struct {
+	GetAccountFromDatabase func(string) string
+}
+func (customer Customer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	keys, ok := r.URL.Query()["accountID"]
 	if keys != nil {
@@ -25,13 +28,15 @@ func GetAccount(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		key := keys[0]
-		message := GetAccountFromDatabase(key)
+		message := customer.GetAccountFromDatabase(key)
 		w.Write([]byte(message))
 	} else {
 		message := GetAllAccountFromDatabase()
 		w.Write([]byte(message))
 	}
 }
+
+
 
 func GetAllAccountFromDatabase() string {
 	db, err := sql.Open("mysql", "root:Admin123!@tcp(178.128.48.140:3306)/aommi")
@@ -172,4 +177,10 @@ func GetAccountFromDatabase(key string) string {
 
 	arrAccount, _ := json.Marshal(account)
 	return string(arrAccount)
+}
+
+func GetAccountForTest(w http.ResponseWriter, r *http.Request) {
+	message := `[{"accountID":"1100400758552","accountName":"ปวรืศร มยานนท์","pointBalance":0},{"accountID":"1140100074828","accountName":"วรพรต เดชลรัตน์","pointBalance":3000}]`
+	w.Header().Set("Content-Type", "application/json")	
+	w.Write([]byte(message))
 }
