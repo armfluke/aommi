@@ -19,12 +19,12 @@ class RecyclerViewAdapter(val mainActivity: MainActivity, val account: Account, 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.promotionName?.text = promotionList[position].promotionName
         //holder?.promotionImage?.text = promotionList[position].image
-        holder?.description?.text = promotionList[position].condition
+        //holder?.description?.text = promotionList[position].condition
         holder?.coin?.text = promotionList[position].point.toString()
 
         Glide.with(mainActivity).load(promotionList[position].image).into(holder?.promotionImage)
 
-        holder?.redeemButton?.setOnClickListener{
+        holder?.itemView?.setOnClickListener{
             //Toast.makeText(mainActivity, "Clicked!!!", Toast.LENGTH_LONG).show()
 
             val intent = Intent(mainActivity, RewardActivity::class.java)
@@ -46,9 +46,9 @@ class RecyclerViewAdapter(val mainActivity: MainActivity, val account: Account, 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val promotionName = itemView.findViewById<TextView>(R.id.promotionName)
         //val promotionImage = itemView.findViewById<TextView>(R.id.promotionImage)
-        val description = itemView.findViewById<TextView>(R.id.promotionDescription)
+        //val description = itemView.findViewById<TextView>(R.id.promotionDescription)
         val coin = itemView.findViewById<TextView>(R.id.coin)
-        val redeemButton = itemView.findViewById<TextView>(R.id.redeemButton)
+        //val redeemButton = itemView.findViewById<TextView>(R.id.redeemButton)
         val promotionImage = itemView.findViewById<ImageView>(R.id.promotionImage)
     }
 

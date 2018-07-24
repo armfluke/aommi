@@ -22,6 +22,11 @@ object GlobalVariable {
 
 class MainActivity : AppCompatActivity() {
 
+    override fun onStart() {
+        super.onStart()
+        getAccount()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         getAccount()
     }
 
-    fun createRecyclerView(account: Account, promotion: ArrayList<Promotion>){
+    fun createRecyclerView(account: Account, promotion: ArrayList<Promotion>) {
         val rv = findViewById<RecyclerView>(R.id.rcvPromotionList)
         rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
 
@@ -37,8 +42,8 @@ class MainActivity : AppCompatActivity() {
         rv.adapter = adapter
     }
 
-    private fun getAccount(){
-        "${GlobalVariable.baseUrl}/account".httpGet().responseString(){ request, response, result ->
+    private fun getAccount() {
+        "${GlobalVariable.baseUrl}/account".httpGet().responseString() { request, response, result ->
             //do something with response
             when (result) {
                 is Result.Failure -> {
@@ -73,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getAllPromotion(account: Account){
+    private fun getAllPromotion(account: Account) {
         //an extension over string (support GET, PUT, POST, DELETE with httpGet(), httpPut(), httpPost(), httpDelete())
         "${GlobalVariable.baseUrl}/promotion".httpGet().responseString { request, response, result ->
             //do something with response

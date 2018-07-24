@@ -32,10 +32,14 @@ type Status struct {
 	Status     string `json:"status"`
 }
 
-func GetPromotion(w http.ResponseWriter, r *http.Request) {
+type Product struct {
+	GetPromotionFromDatabase func() string
+}
+
+func (product Product) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	message := GetPromotionFromDatabase()
+	message := product.GetPromotionFromDatabase()
 
 	w.Write([]byte(message))
 }

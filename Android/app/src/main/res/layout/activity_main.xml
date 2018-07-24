@@ -62,26 +62,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
+
+        <LinearLayout
             android:id="@+id/btnScanQR"
-            android:text="scan qr"
-            android:textColor="#fff"
-            android:layout_gravity="center"
+            android:orientation="horizontal"
             android:background="@drawable/bg_border"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="130dp"
+            android:layout_height="50dp">
+            <ImageView
+                android:src="@drawable/qrcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textStyle="bold"
+                android:textColor="#FFF"
+                android:text="SCAN QR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         <android.support.v4.widget.Space
             android:layout_width="wrap_content"
             android:layout_height="20dp" />
-        <TextView
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Promotion"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Promotion"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
         <RelativeLayout
             android:visibility="gone"
             android:id="@+id/relPromotion1"

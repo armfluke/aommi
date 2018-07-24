@@ -11,8 +11,8 @@ import (
 
 func main() {
 
-	http.HandleFunc("/account", loyalty.GetAccount)
-	http.HandleFunc("/promotion", loyalty.GetPromotion)
+	http.Handle("/account", loyalty.Customer{loyalty.GetAccountFromDatabase})
+	http.Handle("/promotion", loyalty.Product{loyalty.GetPromotionFromDatabase})
 	http.HandleFunc("/promotion/use", loyalty.UsePromotion)
 	http.HandleFunc("/point/update", loyalty.UpdatePoint)
 	http.HandleFunc("/web/account", loyaltyWeb.WebViewAccount)
