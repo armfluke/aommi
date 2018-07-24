@@ -128,4 +128,10 @@ class ScanQRActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        codeScanner.stopPreview()
+        codeScanner.releaseResources()
+    }
 }
