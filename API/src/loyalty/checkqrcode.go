@@ -1,9 +1,6 @@
 package loyalty
 
 import (
-	"database/sql"
-	"strconv"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -28,11 +25,10 @@ func CheckQRCode(qrCode string) bool {
 }
 
 func GetQRCodeFromDatabase(key string) string {
-	db := ConnectDatabase();
-	if db==nil{
+	db := ConnectDatabase()
+	if db == nil {
 		return ""
 	}
-
 	defer db.Close()
 
 	rows, err := db.Query("SELECT * FROM code")
@@ -40,54 +36,16 @@ func GetQRCodeFromDatabase(key string) string {
 		return ""
 	}
 
-	columns, err := rows.Columns()
-	if err != nil {
-		return ""
-	}
-
-	values := make([]sql.RawBytes, len(columns))
-
-	scanArgs := make([]interface{}, len(values))
-	for i := range values {
-		scanArgs[i] = &values[i]
-	}
-
 	var qrcode []QRCode
-
+	var qr QRCode
 	for rows.Next() {
-		err = rows.Scan(scanArgs...)
+		err = rows.Scan(&qr.CodeID, &qr.CodeName, &qr.CodeType, &qr.CodePoint)
 		if err != nil {
 			return ""
 		}
 
-		var value string
-		var data QRCode
-		for i, col := range values {
-			if col == nil {
-				value = "NULL"
-			} else {
-				value = string(col)
-			}
-
-			switch columns[i] {
-			case "CodeID":
-				data.CodeID, _ = strconv.Atoi(value)
-			case "CodeName":
-				data.CodeName = value
-			case "CodeType":
-				data.CodeType = value
-			case "CodePoint":
-				data.CodePoint, _ = strconv.Atoi(value)
-				if data.CodeName == key {
-					qrcode = append(qrcode,
-						QRCode{
-							CodeID:    data.CodeID,
-							CodeName:  data.CodeName,
-							CodeType:  data.CodeType,
-							CodePoint: data.CodePoint,
-						})
-				}
-			}
+		if key == qr.CodeName {
+			qrcode = append(qrcode, qr)
 		}
 	}
 

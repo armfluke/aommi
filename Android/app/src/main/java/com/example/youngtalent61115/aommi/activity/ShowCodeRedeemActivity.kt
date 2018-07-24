@@ -3,13 +3,15 @@ package com.example.youngtalent61115.aommi.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.beust.klaxon.Klaxon
+import com.example.youngtalent61115.aommi.GlobalVariable
 import com.example.youngtalent61115.aommi.R
 import com.example.youngtalent61115.aommi.networking.Account
 import com.example.youngtalent61115.aommi.networking.Promotion
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.result.Result
 import kotlinx.android.synthetic.main.activity_show_code_redeem.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ShowCodeRedeemActivity  : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,12 +24,31 @@ class ShowCodeRedeemActivity  : AppCompatActivity() {
         val account = intent.getParcelableExtra<Account>("account")
 
         usePromotion(account, promotion, redeemCode)
+        setDateQRCode()
+        clickCancel()
+    }
+
+    private fun clickCancel() {
+        btn_cancel.setOnClickListener {
+            this.finish()
+        }
+    }
+
+    private fun setDateQRCode(){
+        txt_date.text = getCurrentDateTime()
+    }
+    private fun getCurrentDateTime(): String{
+        val cal = Calendar.getInstance()
+        val date = cal.time
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val formattedDate = dateFormat.format(date)
+        return  formattedDate
     }
 
     fun usePromotion(account: Account, promotion: Promotion, redeemCode: String){
-        val bodyPromotionUse = "{\"accountID\":\"" + account.accountID + "\",promotionID\":" + promotion.promotionID + ",\"rewardCode\":\"" + redeemCode + "\",\"pointBalance\":" + (account.pointBalance - promotion.point).toString() + "}"
+        val bodyPromotionUse = "{\"accountID\":\"${account.accountID}\",promotionID\":${promotion.promotionID},\"rewardCode\":\"${redeemCode}\",\"pointBalance\":${(account.pointBalance - promotion.point).toString()}}"
         //Log.d("armfluke", bodyPromotionUse)
-        "http://10.0.2.2:3000/promotion/use".httpPost().body(bodyPromotionUse).responseString{ request, response, result ->
+        "${GlobalVariable.baseUrl}/promotion/use".httpPost().body(bodyPromotionUse).responseString{ request, response, result ->
             //do something with response
             when (result) {
                 is Result.Failure -> {
@@ -45,7 +66,7 @@ class ShowCodeRedeemActivity  : AppCompatActivity() {
         }
 
         val bodyAccount = "{\"accountID\":\"" + account.accountID + "\",\"pointBalance\":" + (account.pointBalance - promotion.point).toString() + "}"
-        "http://10.0.2.2:3000/point/update".httpPost().body(bodyAccount).responseString{ request, response, result ->
+        "${GlobalVariable.baseUrl}/point/update".httpPost().body(bodyAccount).responseString{ request, response, result ->
             //do something with response
             when (result) {
                 is Result.Failure -> {

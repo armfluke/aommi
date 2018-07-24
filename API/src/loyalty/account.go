@@ -1,22 +1,26 @@
 package loyalty
 
 import (
-	"database/sql"
 	"encoding/json"
 	"log"
 	"net/http"
-	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 type Account struct {
-	AccountID    string `json:"accountID"`
-	AccountName  string `json:"accountName"`
-	PointBalance int    `json:"pointBalance"`
+	AccountID     string `json:"accountID"`
+	AccountName   string `json:"accountName"`
+	PointBalance  int    `json:"pointBalance"`
+	SavingAccount int    `json:"savingAccount"`
+	FixedAccount  int    `json:"fixedAccount"`
 }
 
-func GetAccount(w http.ResponseWriter, r *http.Request) {
+type Customer struct {
+	GetAccountFromDatabase func(string) string
+}
+
+func (customer Customer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	keys, ok := r.URL.Query()["accountID"]
 	if keys != nil {
@@ -25,7 +29,7 @@ func GetAccount(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		key := keys[0]
-		message := GetAccountFromDatabase(key)
+		message := customer.GetAccountFromDatabase(key)
 		w.Write([]byte(message))
 	} else {
 		message := GetAllAccountFromDatabase()
@@ -34,12 +38,10 @@ func GetAccount(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllAccountFromDatabase() string {
-	db, err := sql.Open("mysql", "root:Admin123!@tcp(178.128.48.140:3306)/aommi")
-
-	if err != nil {
+	db := ConnectDatabase()
+	if db == nil {
 		return ""
 	}
-
 	defer db.Close()
 
 	rows, err := db.Query("SELECT * FROM account")
@@ -47,53 +49,14 @@ func GetAllAccountFromDatabase() string {
 		return ""
 	}
 
-	columns, err := rows.Columns()
-	if err != nil {
-		return ""
-	}
-
-	values := make([]sql.RawBytes, len(columns))
-
-	scanArgs := make([]interface{}, len(values))
-	for i := range values {
-		scanArgs[i] = &values[i]
-	}
-
 	var account []Account
-
+	var acc Account
 	for rows.Next() {
-		err = rows.Scan(scanArgs...)
+		err = rows.Scan(&acc.AccountID, &acc.AccountName, &acc.PointBalance, &acc.SavingAccount, &acc.FixedAccount)
 		if err != nil {
 			return ""
 		}
-
-		var value string
-		var data Account
-		for i, col := range values {
-			if col == nil {
-				value = "NULL"
-			} else {
-				value = string(col)
-			}
-
-			switch columns[i] {
-			case "AccountID":
-				data.AccountID = value
-			case "AccountName":
-				data.AccountName = value
-			case "PointBalance":
-				data.PointBalance, _ = strconv.Atoi(value)
-			}
-
-			if i == len(columns)-1 {
-				account = append(account,
-					Account{
-						AccountID:    data.AccountID,
-						AccountName:  data.AccountName,
-						PointBalance: data.PointBalance,
-					})
-			}
-		}
+		account = append(account, acc)
 	}
 
 	if err = rows.Err(); err != nil {
@@ -105,9 +68,8 @@ func GetAllAccountFromDatabase() string {
 }
 
 func GetAccountFromDatabase(key string) string {
-	db, err := sql.Open("mysql", "root:Admin123!@tcp(178.128.48.140:3306)/aommi")
-
-	if err != nil {
+	db := ConnectDatabase()
+	if db == nil {
 		return ""
 	}
 
@@ -118,51 +80,16 @@ func GetAccountFromDatabase(key string) string {
 		return ""
 	}
 
-	columns, err := rows.Columns()
-	if err != nil {
-		return ""
-	}
-
-	values := make([]sql.RawBytes, len(columns))
-
-	scanArgs := make([]interface{}, len(values))
-	for i := range values {
-		scanArgs[i] = &values[i]
-	}
-
 	var account []Account
-
+	var acc Account
 	for rows.Next() {
-		err = rows.Scan(scanArgs...)
+		err = rows.Scan(&acc.AccountID, &acc.AccountName, &acc.PointBalance, &acc.SavingAccount, &acc.FixedAccount)
 		if err != nil {
 			return ""
 		}
 
-		var value string
-		var data Account
-		for i, col := range values {
-			if col == nil {
-				value = "NULL"
-			} else {
-				value = string(col)
-			}
-
-			switch columns[i] {
-			case "AccountID":
-				data.AccountID = value
-			case "AccountName":
-				data.AccountName = value
-			case "PointBalance":
-				data.PointBalance, _ = strconv.Atoi(value)
-				if data.AccountID == key {
-					account = append(account,
-						Account{
-							AccountID:    data.AccountID,
-							AccountName:  data.AccountName,
-							PointBalance: data.PointBalance,
-						})
-				}
-			}
+		if key == acc.AccountID {
+			account = append(account, acc)
 		}
 	}
 

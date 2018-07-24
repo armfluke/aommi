@@ -5,29 +5,21 @@ import (
 	"testing"
 )
 
-func Test_CheckQRCode_Input_qr_200savingaccount_and_account1969900224728_Should_Be_Banlance_and_point(t *testing.T) {
+func Test_CheckQRCode_Input_qrCode_200savingaccount_Should_Be_Status_True(t *testing.T) {
 	qrCode := "200|saving_account"
-	account := "1969900224728"
-	actual_balance, actual_point, _ := UpdatePointByQR(qrCode, account)
-	balance, _ := GetBalanceAccount(account)
-	point, _ := GetPointQR(qrCode)
-	expected_balance, expected_point := balance, point
+	expectedResult := true
+	actualResult := CheckQRCode(qrCode)
 
-	if actual_balance != expected_balance || actual_point != expected_point {
-		t.Errorf("expect '%d %d' but got '%d %d'", expected_balance, expected_point, actual_balance, actual_point)
+	if actualResult != expectedResult {
+		t.Errorf("expect '%t' but got '%t'", expectedResult, actualResult)
 	}
 }
 
-func Test_GetQRCodeFromDatabase_Input_qr_200savingaccount_and_account1969900224728_Should_Be_Banlance_and_point(t *testing.T) {
-	qrCode := "200|saving_account"
-	account := "1969900224728"
-	actual_balance, actual_point, _ := UpdatePointByQR(qrCode, account)
-	balance, _ := GetBalanceAccount(account)
-	point, _ := GetPointQR(qrCode)
-	expected_balance, expected_point := balance, point
+func Test_GetQRCodeFromDatabase_Input_Key_200savingaccount_Should_Be_Output_200saving_account(t *testing.T) {
+	expectedResult := "200|saving_account"
+	actualResult := GetQRCodeFromDatabase(expectedResult)
 
-	if actual_balance != expected_balance || actual_point != expected_point {
-		t.Errorf("expect '%d %d' but got '%d %d'", expected_balance, expected_point, actual_balance, actual_point)
+	if actualResult != expectedResult {
+		t.Errorf("expect '%s' but got '%s'", expectedResult, actualResult)
 	}
-
 }
