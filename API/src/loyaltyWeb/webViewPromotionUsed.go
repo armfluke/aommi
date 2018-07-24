@@ -1,21 +1,19 @@
 package loyaltyWeb
-
 import (
 	"net/http"
-	"database/sql"
-	"bytes"
-	"fmt"
+	
 )
 
+/*
 type PromotionUsed struct {
 	AccountName   string    
 	PromotionName string 
 	Point string
 	DateUsed  string
 }
-
+*/
 func WebViewPromotionUsed(w http.ResponseWriter, r *http.Request) {
-
+/*
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
 	database, error := sql.Open("mysql", "root:Admin123!@tcp(178.128.48.140:3306)/aommi")
@@ -95,4 +93,5 @@ func WebViewPromotionUsed(w http.ResponseWriter, r *http.Request) {
 	 </html>
 	 `)
 	w.Write([]byte(message.String()))
+	*/
 }
