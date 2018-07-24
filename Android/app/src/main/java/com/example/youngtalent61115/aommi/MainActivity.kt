@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import com.beust.klaxon.Klaxon
 import com.example.youngtalent61115.aommi.networking.Account
@@ -21,19 +22,22 @@ object GlobalVariable {
 
 class MainActivity : AppCompatActivity() {
 
+
     override fun onStart() {
         super.onStart()
+        showProgressCircle()
         getAccount()
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        showProgressCircle()
         getAccount()
     }
 
-    fun createRecyclerView(account: Account, promotion: ArrayList<Promotion>) {
+    private fun createRecyclerView(account: Account, promotion: ArrayList<Promotion>) {
         val rv = findViewById<RecyclerView>(R.id.rcvPromotionList)
         rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
 
@@ -92,11 +96,27 @@ class MainActivity : AppCompatActivity() {
                     Log.d("armfluke", "Success!!!")
                     Log.d("armfluke", data)
                     createRecyclerView(account, ArrayList(Klaxon().parseArray<Promotion>(data)))
-
+                    hideProgressCircle()
                 }
             }
         }
     }
+
+    private fun hideProgressCircle() {
+        rcvPromotionList.visibility = View.VISIBLE
+        progress.visibility = View.GONE
+    }
+
+    private fun showProgressCircle() {
+        rcvPromotionList.visibility = View.GONE
+        progress.visibility = View.VISIBLE
+    }
+
+    private fun resetView() {
+
+
+    }
+
 
 
 }
