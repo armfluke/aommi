@@ -11,10 +11,16 @@ import (
 
 func Test_Get_Account_Should_Return_All_Account(t *testing.T) {
 	expected := `[{"accountID":"1100400758552","accountName":"ปวรืศร มยานนท์","pointBalance":0},{"accountID":"1140100074828","accountName":"วรพรต เดชลรัตน์","pointBalance":3000}]`
-	r, _ := http.NewRequest(http.MethodGet, "/account", nil)
+	r, _ := http.NewRequest(http.MethodGet, "/account?accountID=1", nil)
 	w := httptest.NewRecorder()
 
-	GetAccount(w, r)
+	stubGetAccountFromDatabase := func(key string) string{
+		return expected
+	}
+
+	customer := Customer{stubGetAccountFromDatabase}
+
+	customer.ServeHTTP(w,r)
 
 	resp := w.Result()
 	body, _ := ioutil.ReadAll(resp.Body)
