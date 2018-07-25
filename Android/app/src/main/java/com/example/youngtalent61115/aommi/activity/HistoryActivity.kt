@@ -16,6 +16,7 @@ class HistoryActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.activity_history)
+        Log.d("xxx","xxx")
 
         val account = intent.getParcelableExtra<Account>("account")
 
@@ -29,11 +30,11 @@ class HistoryActivity : AppCompatActivity(){
                 }
                 is Result.Success -> {
                     val data = result.get()
-                    Log.d("armfluke", "Success!!!")
-                    Log.d("armfluke", data)
+                    Log.d("armfluke2", "Success!!!")
+                    Log.d("armfluke2", data)
                     val history = ArrayList(Klaxon().parseArray<History>(data))
 
-                    
+
                 }
             }
         }

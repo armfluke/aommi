@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/promotionImage">
             <RelativeLayout
-                android:layout_marginLef="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -38,7 +38,7 @@
 
             </RelativeLayout>
             <RelativeLayout
-                android:layout_marginLef="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -50,7 +50,7 @@
 
             </RelativeLayout>
             <RelativeLayout
-                android:layout_marginLef="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
