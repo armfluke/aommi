@@ -25,7 +25,7 @@ func WebViewAccount(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
   fmt.Println(dir)
-	tmpl := template.Must(template.ParseFiles("loyaltyWeb/webviewaccount.html"))
+	tmpl := template.Must(template.ParseFiles(dir+"/loyaltyWeb/webviewaccount.html"))
 	database := ConnectDatabase()
 	if database == nil {
 		fmt.Fprintf(w,"Error Connect Database")
