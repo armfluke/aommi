@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_reward.*
 import android.content.DialogInterface
 import android.graphics.Color
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.example.youngtalent61115.aommi.networking.Account
 import com.example.youngtalent61115.aommi.networking.Promotion
@@ -51,7 +52,8 @@ class RewardActivity : AppCompatActivity(){
             var redeemCode = ""
             if(pointForRedeem >= 0){
                 messageForSuccess = "คุณได้ทำการใช้คอยน์สำหรับ " + promotion.promotionName+ " เป็นจำนวน " + promotion.point.toString()+ " coins คงเหลือ " + pointForRedeem.toString() + " coins"
-                redeemCode = generateCode(9)
+                redeemCode = generateCode(8)
+                Log.d("reward", redeemCode)
 
                 builder.setPositiveButton("ยืนยัน", DialogInterface.OnClickListener { dialog, id ->
                     val intent = Intent(applicationContext, ShowCodeRedeemActivity::class.java)

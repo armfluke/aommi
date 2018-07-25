@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "ce0ed559-ebf9-4409-9e44-5f9a7245b0a5",
+		"name": "After_Earn_Point",
+		"description": "feature Scan QRcode",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetQRcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "011dc7a6-615a-4348-801c-ec04e317caa8",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"postman.setNextRequest('GetAccount')"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"qrCode\":\"200|saving_account\",\"accountID\":\"1969900224728\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/qr",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"qr"
+					]
+				},
+				"description": "update point into point balance of user"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8fed6466-4ed0-4c37-9f08-91bef56dfcd8",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"AccountID is 1969900224728\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[4].accountID).to.eql(\"1969900224728\");",
+							"});",
+							"",
+							"pm.test(\"Account name is ไพสิฐ ศิริพันธุ์ \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[4].accountName).to.eql(\"ไพสิฐ ศิริพันธุ์\");",
+							"});",
+							"",
+							"pm.test(\"Point Balance is 200\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[4].pointBalance).to.eql(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"account"
+					]
+				},
+				"description": "gat account "
+			},
+			"response": []
+		}
+	]
+}

@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        //AccountID, AccountName, PointBalance
     }
 
     private fun clickHistory(account: Account?) {

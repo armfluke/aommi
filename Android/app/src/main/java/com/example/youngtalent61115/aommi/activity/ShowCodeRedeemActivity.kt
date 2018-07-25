@@ -46,8 +46,8 @@ class ShowCodeRedeemActivity  : AppCompatActivity() {
     }
 
     fun usePromotion(account: Account, promotion: Promotion, redeemCode: String){
-        val bodyPromotionUse = "{\"accountID\":\"${account.accountID}\",promotionID\":${promotion.promotionID},\"rewardCode\":\"${redeemCode}\",\"pointBalance\":${(account.pointBalance - promotion.point).toString()}}"
-        //Log.d("armfluke", bodyPromotionUse)
+        val bodyPromotionUse = "{\"accountID\":\"${account.accountID}\",\"promotionID\":${promotion.promotionID},\"rewardCode\":\"${redeemCode}\"}"
+        Log.d("ttt", bodyPromotionUse)
         "${GlobalVariable.baseUrl}/promotion/use".httpPost().body(bodyPromotionUse).responseString{ request, response, result ->
             //do something with response
             when (result) {
@@ -60,6 +60,7 @@ class ShowCodeRedeemActivity  : AppCompatActivity() {
                     val data = result.get()
 
                     Log.d("armfluke", "Success!!!")
+                    Log.d("ppp", request.toString())
                     Log.d("armfluke", data)
                 }
             }

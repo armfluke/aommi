@@ -61,6 +61,7 @@ func UsePromotion(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	resultsInsert, err := db.Query("INSERT INTO promotionUsed (accountID, promotionID, rewardCode) VALUES ('" + promotion.AccountID + "'," + strconv.Itoa(promotion.PromotionID) + ",'" + promotion.RewardCode + "')")
+
 	resultsInsert.Close()
 
 	if err != nil {
