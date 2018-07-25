@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.youngtalent61115.aommi.activity.RewardActivity
 import com.example.youngtalent61115.aommi.networking.Account
@@ -35,7 +34,7 @@ class RecyclerViewAdapter(val mainActivity: MainActivity, val account: Account, 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.item_list, parent, false)
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.item_promotion_list, parent, false)
         return ViewHolder(v);
     }
 
