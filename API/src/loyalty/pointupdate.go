@@ -19,7 +19,7 @@ func UpdatePoint(w http.ResponseWriter, r *http.Request) {
 	body := json.NewDecoder(r.Body)
 	body.Decode(&decreasepoint)
 
-	if updatePointToDatabase(decreasepoint.PointBalance, decreasepoint.AccountID) {
+	if UpdatePointToDatabase(decreasepoint.PointBalance, decreasepoint.AccountID) {
 		message := Status{StatusCode: 200, Status: "ok"}
 		encoder := json.NewEncoder(w)
 		encoder.Encode(message)
