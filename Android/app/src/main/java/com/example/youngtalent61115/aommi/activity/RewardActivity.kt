@@ -25,12 +25,21 @@ class RewardActivity : AppCompatActivity(){
         piont_for_redeem.text = promotion.point.toString() + " coins"
         condition_promotion.text = promotion.condition
         detail_promotion.text = promotion.description
-        limit_use.text = "Limit: " + promotion.limitUse.toString() + " privilege"
+
+        setLimit(promotion)
         Glide.with(this).load(promotion.image).into(promotionImage)
         promotionBackground.setBackgroundColor(Color.WHITE)
 
         clickRedeem(account, promotion)
 
+    }
+
+    private fun setLimit(promotion: Promotion) {
+        if (promotion.limitUse.toString() == "0") {
+            limit_use.text = "-"
+        } else {
+            limit_use.text = promotion.limitUse.toString()
+        }
     }
 
     private fun clickRedeem(account: Account, promotion: Promotion) {
