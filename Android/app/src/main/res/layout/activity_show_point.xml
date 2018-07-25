@@ -4,17 +4,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/bg_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
+        android:layout_centerInParent="true"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/bg_border">
+        android:gravity="center">
         <TextView
-            android:layout_marginTop="50dp"
-            android:text="You got :"
+            android:text="YOU GOT"
+            android:textSize="40sp"
             android:textColor="#FFF"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -26,12 +33,21 @@
             android:textColor="#FFF"
             android:text="0"
             android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:text="COINS"
+            android:layout_gravity="center" />
     </LinearLayout>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your Balance Point"
+        android:text="Your Points"
         android:gravity="center"
         android:textSize="18sp"
         android:layout_marginTop="20dp"/>
@@ -57,7 +73,7 @@
         android:id="@+id/btn_accept_earn_point"
         android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:text="ACCEPT"
+        android:text="BACK"
         android:textColor="#FFF"
         android:background="@drawable/bg_border"
         android:layout_width="150dp"
