@@ -21,7 +21,7 @@ class HistoryViewAdapter(val historyActivity: HistoryActivity, val account: Acco
         holder?.promotionName?.text = historyList[position].reward
         holder?.point?.text = historyList[position].point.toString()
         holder?.date?.text = historyList[position].date
-        holder?.code?.text = historyList[position].code
+        holder?.code?.text = "Redeem : ${historyList[position].code}"
 
         Glide.with(historyActivity).load(historyList[position].image).into(holder?.promotionImage)
 
