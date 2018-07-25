@@ -15,6 +15,7 @@ type CustomersUseCode struct {
 }
 type DataToPageEarn struct {
 	CustomerList []CustomersUseCode 
+	SumAllPoints int
 }
 
 func GetAccountEarn(w http.ResponseWriter, r *http.Request) {
@@ -32,6 +33,7 @@ func GetAccountEarn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	data := DataToPageEarn{}
+	sumPoint := 0
 	for rows.Next() {
 		var cdata CustomersUseCode
 		error = rows.Scan(&cdata.AccountName, &cdata.PointEarn, &cdata.DateEarn, &cdata.CodeType)
@@ -39,8 +41,10 @@ func GetAccountEarn(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w,"Error Query")
 			return
 		}
+		sumPoint = sumPoint + cdata.PointEarn
 		data.CustomerList = append(data.CustomerList,cdata)
 	}
+	data.SumAllPoints = sumPoint
 	tmpl.Execute(w, data)
 }
 	
