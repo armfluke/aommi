@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         val rv = findViewById<RecyclerView>(R.id.rcvPromotionList)
         rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
 
-        var adapter = RecyclerViewAdapter(this, account, promotion)
+        var adapter = PromotionViewAdapter(this, account, promotion)
         rv.adapter = adapter
     }
 
