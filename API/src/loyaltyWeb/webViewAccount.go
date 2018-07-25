@@ -19,7 +19,7 @@ type DataToPage struct {
 }
 func WebViewAccount(w http.ResponseWriter, r *http.Request) {
 
-	tmpl := template.Must(template.ParseFiles("loyaltyWeb/webViewAccount.html"))
+	tmpl := template.Must(template.ParseFiles("loyaltyWeb/webviewaccount.html"))
 	database := ConnectDatabase()
 	if database == nil {
 		fmt.Fprintf(w,"Error Connect Database")

@@ -10,11 +10,12 @@ import (
 type CustomersRedeemCode struct {
 	AccountName   string    
 	Reward string 
-	Point string
+	Point int
 	DateUsed string  
 }
 type DataToPageRedeem struct {
 	CustomerList []CustomersRedeemCode 
+	SumAllPoints int
 }
 
 func GetAccountRedeem(w http.ResponseWriter, r *http.Request) {
@@ -33,6 +34,7 @@ func GetAccountRedeem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	data := DataToPageRedeem{}
+	sumPoint := 0
 	for rows.Next() {
 		var cdata CustomersRedeemCode
 		error = rows.Scan(&cdata.AccountName, &cdata.Reward, &cdata.Point, &cdata.DateUsed)
@@ -40,8 +42,10 @@ func GetAccountRedeem(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w,"Error Query save")
 			return
 		}
+		sumPoint = sumPoint + cdata.Point
 		data.CustomerList = append(data.CustomerList,cdata)
 	}
+	data.SumAllPoints = sumPoint
 	tmpl.Execute(w, data)
 }
 	
