@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity
 import com.example.youngtalent61115.aommi.R
 import kotlinx.android.synthetic.main.activity_reward.*
 import android.content.DialogInterface
+import android.graphics.Color
 import android.support.v7.app.AlertDialog
+import com.bumptech.glide.Glide
 import com.example.youngtalent61115.aommi.networking.Account
 import com.example.youngtalent61115.aommi.networking.Promotion
 
@@ -24,6 +26,8 @@ class RewardActivity : AppCompatActivity(){
         condition_promotion.text = promotion.condition
         detail_promotion.text = promotion.description
         limit_use.text = "Limit: " + promotion.limitUse.toString() + " privilege"
+        Glide.with(this).load(promotion.image).into(promotionImage)
+        promotionBackground.setBackgroundColor(Color.WHITE)
 
         clickRedeem(account, promotion)
 
@@ -54,7 +58,7 @@ class RewardActivity : AppCompatActivity(){
                 }
 
             }else {
-                messageForSuccess = "ขออภัย จำนวนพอยต์ของคุณไม่พอ"
+                messageForSuccess = "ขออภัย จำนวนคอยน์ของคุณไม่พอ"
 
                 builder.setNegativeButton("ยืนยัน", DialogInterface.OnClickListener { dialog, id ->
                     dialog.cancel()

@@ -11,7 +11,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Account List</title>
+    <title>QR Code</title>
 
     <!-- Fontfaces CSS-->
     <link href="/css/font-face.css" rel="stylesheet" media="all">
@@ -57,7 +57,7 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li>
+                       <li>
                             <a href="/web/account">
                                 <i class="fas fa-chart-bar"></i>Account List</a>
                         </li>
@@ -127,39 +127,17 @@
                                     <table class="table table-borderless table-striped table-earning table-data3">
                                         <thead>
                                             <tr>
-                                                <th>ชื่อบัญชี</th>
-                                                <th>พอยท์สะสม</th>
-                                                <th>บัญชีออมทรัพย์</th>
-                                                <th>บัญชีฝากประจำ</th>
-                                                <th style="text-align: center">ล้างค่า</th>
+                                                <th>รายการ</th>
+                                                <th>พอยท์ทีได้</th>
+                                                <th style="text-align: center">QR</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                {{range .CustomerList}}
+                                                {{range .CodeList}}
                                                     <tr>
-                                                        <td>{{.AccountName}}</td>
-                                                        <td>{{.PointBalance}}</td>
-                                                        <td>
-                                                            {{if .SavingAccount}}
-                                                                เปิดแล้ว
-                                                            {{else}}
-                                                                ยังไม่เปิด
-                                                            {{end}}
-                                                        </td>
-                                                        <td>
-                                                                {{if .FixedAccount}}
-                                                                    เปิดแล้ว
-                                                                {{else}}
-                                                                    ยังไม่เปิด
-                                                                {{end}}
-                                                        </td>
-                                                        <td style="text-align: center">
-                                                                <form action="/web/account/reset" method="post">
-                                                                    <input type="hidden" name="account" value="{{.AccountID}}">
-                                                                    <input class="btn btn-info" name="typeaccount" type="submit" value="Saving">
-                                                                    <input class="btn btn-warning" name="typeaccount" type="submit" value="Fixed">
-                                                                </form>
-                                                        </td>
+                                                        <td style="padding-top: 50px;font-size: 20px">{{.Code}}</td>
+                                                        <td style="padding-top: 50px;font-size: 20px">{{.CodePoint}}</td>
+                                                        <td style="text-align: center"><img src="{{.Image}}" height="120" width="120"></td>
                                                     </tr>
                                                 {{end}}
                                         </tbody>

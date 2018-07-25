@@ -28,6 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
+                    android:autoSizeTextType="uniform"
                     android:textColor="#fff"
                     android:textSize="50sp"
                     android:textStyle="bold" />
@@ -37,7 +38,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="coin"
+                    android:text="coins"
                     android:textColor="#fff"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -69,7 +70,7 @@
             android:background="@drawable/bg_border"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="50dp">
             <ImageView
                 android:src="@drawable/qrcode"
@@ -135,9 +136,20 @@
                 />
 
         </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rcvPromotionList"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <ProgressBar
+                android:id="@+id/progress"
+                android:visibility="visible"
+                android:layout_centerInParent="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <android.support.v7.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/rcvPromotionList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
