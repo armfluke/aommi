@@ -13,7 +13,7 @@ import com.example.youngtalent61115.aommi.activity.RewardActivity
 import com.example.youngtalent61115.aommi.networking.Account
 import com.example.youngtalent61115.aommi.networking.Promotion
 
-class RecyclerViewAdapter(val mainActivity: MainActivity, val account: Account, val promotionList: ArrayList<Promotion>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class PromotionViewAdapter(val mainActivity: MainActivity, val account: Account, val promotionList: ArrayList<Promotion>): RecyclerView.Adapter<PromotionViewAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.promotionName?.text = promotionList[position].promotionName
