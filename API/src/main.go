@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-
+	
 	http.Handle("/account", loyalty.Customer{loyalty.GetAccountFromDatabase})
 	http.Handle("/promotion", loyalty.Product{loyalty.GetPromotionFromDatabase})
 	http.HandleFunc("/promotion/use", loyalty.UsePromotion)
@@ -18,8 +18,9 @@ func main() {
 	http.HandleFunc("/web/account", loyaltyWeb.WebViewAccount)
 	http.HandleFunc("/web/promotionused", loyaltyWeb.WebViewPromotionUsed)
 	http.HandleFunc("/qr", loyalty.ScanQrCode)
+	
 
 	log.Println("Server running on port 3001")
 
-	log.Fatal(http.ListenAndServe(":3001", nil))
+	log.Fatal(http.ListenAndServe(":3001", nil))	
 }
