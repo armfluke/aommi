@@ -20,47 +20,73 @@
             android:src="@drawable/major_logo" />
 
         <LinearLayout
-            android:gravity="center_vertical"
-            android:orientation="vertical"
+            android:paddingLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/promotionImage">
+            android:layout_toRightOf="@id/promotionImage"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
             <RelativeLayout
-                android:layout_marginLef="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
                 <TextView
-                    android:text="PROMOTION_NAME"
-                    android:textStyle="normal"
-                    android:layout_alignParentLeft="true"
+                    android:id="@+id/tvPromotionName"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="PROMOTION_NAME"
+                    android:textStyle="normal" />
 
             </RelativeLayout>
+
             <RelativeLayout
-                android:layout_marginLef="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
                 <TextView
+                    android:id="@+id/tvRedeemfor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
                     android:text="REDEEM_FOR"
-                    android:textStyle="normal"
-                    android:layout_alignParentLeft="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textStyle="normal" />
 
             </RelativeLayout>
+
             <RelativeLayout
-                android:layout_marginLef="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
                 <TextView
-                    android:text="PROMOTION_NAME"
-                    android:textStyle="normal"
-                    android:layout_alignParentLeft="true"
+                    android:id="@+id/tvUsedDate"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="DATE"
+                    android:textStyle="normal" />
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/tvCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="CODE"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </RelativeLayout>
