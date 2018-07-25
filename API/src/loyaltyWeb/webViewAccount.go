@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"fmt"
 	. "loyalty"
+	"os" 
+	"log"
 )
 
 type Customers struct {
@@ -18,7 +20,11 @@ type DataToPage struct {
 	CustomerList []Customers 
 }
 func WebViewAccount(w http.ResponseWriter, r *http.Request) {
-
+	dir, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+  fmt.Println(dir)
 	tmpl := template.Must(template.ParseFiles("loyaltyWeb/webviewaccount.html"))
 	database := ConnectDatabase()
 	if database == nil {
