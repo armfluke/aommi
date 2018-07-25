@@ -62,10 +62,17 @@ class MainActivity : AppCompatActivity() {
                     setBalancePointAndAccountName(account)
                     getAllPromotion(account[0])
                     clickScanQR(account[0])
+                    clickHistory(account[0])
                 }
             }
         }
         //AccountID, AccountName, PointBalance
+    }
+
+    private fun clickHistory(account: Account?) {
+        btnHistory.setOnClickListener {
+
+        }
     }
 
     private fun setBalancePointAndAccountName(account: ArrayList<Account>) {

@@ -3,7 +3,7 @@
     package="com.example.youngtalent61115.aommi">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +23,8 @@
         <activity android:name=".activity.RewardActivity" />
         <activity android:name=".activity.ShowCodeRedeemActivity" />
         <activity android:name=".activity.ShowPointActivity" />
-        <activity android:name=".activity.ScanQRActivity"></activity>
+        <activity android:name=".activity.ScanQRActivity" />
+        <activity android:name=".HistoryActivity"></activity>
     </application>
 
 </manifest>
