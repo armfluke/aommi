@@ -112,7 +112,7 @@ class ScanQRActivity : AppCompatActivity() {
                             codeScanner.startPreview()
                         }
 
-                        builder.setMessage("ขออภัย ไม่พบ QR Code ในระบบ")
+                        builder.setMessage("ไม่สามารถใช้ QR Code นี้ได้")
                         builder.setTitle("Scan QR Code")
 
                         builder.show()
