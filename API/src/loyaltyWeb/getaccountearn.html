@@ -11,7 +11,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Account List</title>
+    <title>Account Earn</title>
 
     <!-- Fontfaces CSS-->
     <link href="/css/font-face.css" rel="stylesheet" media="all">
@@ -57,7 +57,7 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li>
+                       <li>
                             <a href="/web/account">
                                 <i class="fas fa-chart-bar"></i>Account List</a>
                         </li>
@@ -67,7 +67,7 @@
                         </li>
                         <li>
                             <a href="/web/account/redeem">
-                                <i class="far fa-check-square"></i>Account Redeem</a>
+                                <i class="far fa-check-square"></i>Account Redeen</a>
                         </li>
                         <li>
                             <a href="/web/qr">
@@ -128,38 +128,18 @@
                                         <thead>
                                             <tr>
                                                 <th>ชื่อบัญชี</th>
-                                                <th>พอยท์สะสม</th>
-                                                <th>บัญชีออมทรัพย์</th>
-                                                <th>บัญชีฝากประจำ</th>
-                                                <th style="text-align: center">ล้างค่า</th>
+                                                <th>โค๊ดทีใช้</th>
+                                                <th>พอยท์ทีได้รับ</th>
+                                                <th style="text-align: center">วันที่</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 {{range .CustomerList}}
                                                     <tr>
                                                         <td>{{.AccountName}}</td>
-                                                        <td>{{.PointBalance}}</td>
-                                                        <td>
-                                                            {{if .SavingAccount}}
-                                                                เปิดแล้ว
-                                                            {{else}}
-                                                                ยังไม่เปิด
-                                                            {{end}}
-                                                        </td>
-                                                        <td>
-                                                                {{if .FixedAccount}}
-                                                                    เปิดแล้ว
-                                                                {{else}}
-                                                                    ยังไม่เปิด
-                                                                {{end}}
-                                                        </td>
-                                                        <td style="text-align: center">
-                                                                <form action="/web/account/reset" method="post">
-                                                                    <input type="hidden" name="account" value="{{.AccountID}}">
-                                                                    <input class="btn btn-info" name="typeaccount" type="submit" value="Saving">
-                                                                    <input class="btn btn-warning" name="typeaccount" type="submit" value="Fixed">
-                                                                </form>
-                                                        </td>
+                                                        <td>{{.CodeType}}</td>
+                                                        <td>{{.PointEarn}}</td>
+                                                        <td style="text-align: center">{{.DateEarn}}</td>
                                                     </tr>
                                                 {{end}}
                                         </tbody>
