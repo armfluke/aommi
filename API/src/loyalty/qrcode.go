@@ -23,11 +23,12 @@ func ScanQrCode(w http.ResponseWriter, r *http.Request) {
 
 	body := json.NewDecoder(r.Body)
 	body.Decode(&postBodyQR)
-
 	checkStatus := CheckQRCode(postBodyQR.QRCode)
+
 	if checkStatus {
 		resultBalance, resultQRPoint, status := UpdatePointByQR(postBodyQR.QRCode,
 			postBodyQR.AccountID)
+
 		if status {
 			responseQR = MessageQR{BalancePoint: resultBalance, QrPoint: resultQRPoint}
 		}
