@@ -46,7 +46,7 @@ class HistoryActivity : AppCompatActivity(){
                         val history = ArrayList(Klaxon().parseArray<History>(data))
                         createRecyclerView(account, history)
                     }catch (e: Exception){
-                        
+
                     }
 
                     hideProgressCircle()

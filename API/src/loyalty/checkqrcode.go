@@ -1,8 +1,6 @@
 package loyalty
 
 import (
-	"log"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -13,7 +11,6 @@ type QRCode struct {
 func CheckQRCode(qrCode string) bool {
 	if qrCode != "" {
 		message := GetQRCodeFromDatabase(qrCode)
-		log.Println("arm", message)
 
 		if message == qrCode {
 			return true

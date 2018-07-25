@@ -21,7 +21,7 @@ func UpdatePointByQR(qr string, account string) (int, int, bool) {
 	}
 
 	resultbalance = accountBalance + pointqr
-	if updatePointToDatabase(resultbalance, account) {
+	if UpdatePointToDatabase(resultbalance, account) {
 		return resultbalance, pointqr, true
 	} else {
 		return 0, 0, false

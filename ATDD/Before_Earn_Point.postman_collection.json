@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "edf9105f-6443-4eea-988a-f2986481f366",
+		"name": "Before_Earn_Point",
+		"description": "set value to user before earn point",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UpdatePoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "008f4134-c95f-4c25-8767-e350357e33c9",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status upadate point = 0 to AccountID = 1969900224728\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"ok\");",
+							"});",
+							"",
+							"postman.setNextRequest('GetAccount')"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"accountID\":\"1969900224728\",\"pointBalance\":0}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/point/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"point",
+						"update"
+					]
+				},
+				"description": "update balance point"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80ddc613-2201-4968-8aa8-be3138406152",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"AccountID is 1969900224728\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[4].accountID).to.eql(\"1969900224728\");",
+							"});",
+							"",
+							"pm.test(\"Account name is ไพสิฐ ศิริพันธุ์ \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[4].accountName).to.eql(\"ไพสิฐ ศิริพันธุ์\");",
+							"});",
+							"",
+							"pm.test(\"Point Balance is 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[4].pointBalance).to.eql(0);",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3001/account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"account"
+					]
+				},
+				"description": "gat account "
+			},
+			"response": []
+		}
+	]
+}
