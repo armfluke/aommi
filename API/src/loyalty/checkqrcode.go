@@ -5,15 +5,13 @@ import (
 )
 
 type QRCode struct {
-	CodeID    int    `json:"CodeID"`
-	CodeName  string `json:"CodeName"`
-	CodeType  string `json:"CodeType"`
-	CodePoint int    `json:"CodePoint"`
+	CodeName string `json:"CodeName"`
 }
 
 func CheckQRCode(qrCode string) bool {
 	if qrCode != "" {
 		message := GetQRCodeFromDatabase(qrCode)
+
 		if message == qrCode {
 			return true
 		} else {
@@ -31,7 +29,7 @@ func GetQRCodeFromDatabase(key string) string {
 	}
 	defer db.Close()
 
-	rows, err := db.Query("SELECT * FROM code")
+	rows, err := db.Query("SELECT CodeName FROM code WHERE CodeName=?", key)
 	if err != nil {
 		return ""
 	}
@@ -39,14 +37,11 @@ func GetQRCodeFromDatabase(key string) string {
 	var qrcode []QRCode
 	var qr QRCode
 	for rows.Next() {
-		err = rows.Scan(&qr.CodeID, &qr.CodeName, &qr.CodeType, &qr.CodePoint)
+		err = rows.Scan(&qr.CodeName)
 		if err != nil {
 			return ""
 		}
-
-		if key == qr.CodeName {
-			qrcode = append(qrcode, qr)
-		}
+		qrcode = append(qrcode, qr)
 	}
 
 	if err = rows.Err(); err != nil {
