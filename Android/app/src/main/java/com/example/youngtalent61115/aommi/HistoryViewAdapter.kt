@@ -9,45 +9,38 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.example.youngtalent61115.aommi.activity.HistoryActivity
 import com.example.youngtalent61115.aommi.activity.RewardActivity
 import com.example.youngtalent61115.aommi.networking.Account
+import com.example.youngtalent61115.aommi.networking.History
 import com.example.youngtalent61115.aommi.networking.Promotion
 
-class HistoryViewAdapter(val mainActivity: MainActivity, val account: Account, val promotionList: ArrayList<Promotion>): RecyclerView.Adapter<HistoryViewAdapter.ViewHolder>() {
+class HistoryViewAdapter(val historyActivity: HistoryActivity, val account: Account, val historyList: ArrayList<History>): RecyclerView.Adapter<HistoryViewAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder?.promotionName?.text = promotionList[position].promotionName
-        //holder?.promotionImage?.text = promotionList[position].image
-        //holder?.description?.text = promotionList[position].condition
-        holder?.coin?.text = promotionList[position].point.toString()
+        holder?.promotionName?.text = historyList[position].reward
+        holder?.point?.text = historyList[position].point.toString()
+        holder?.date?.text = historyList[position].date
+        holder?.code?.text = historyList[position].code
 
-        Glide.with(mainActivity).load(promotionList[position].image).into(holder?.promotionImage)
+        Glide.with(historyActivity).load(historyList[position].image).into(holder?.promotionImage)
 
-        holder?.itemView?.setOnClickListener{
-            //Toast.makeText(mainActivity, "Clicked!!!", Toast.LENGTH_LONG).show()
-
-            val intent = Intent(mainActivity, RewardActivity::class.java)
-            intent.putExtra("account", account)
-            intent.putExtra("promotion", promotionList[position])
-            startActivity(mainActivity ,intent, null)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.item_promotion_list, parent, false)
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.item_history_list, parent, false)
         return ViewHolder(v);
     }
 
     override fun getItemCount(): Int {
-        return promotionList.size
+        return historyList.size
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val promotionName = itemView.findViewById<TextView>(R.id.promotionName)
-        //val promotionImage = itemView.findViewById<TextView>(R.id.promotionImage)
-        //val description = itemView.findViewById<TextView>(R.id.promotionDescription)
-        val coin = itemView.findViewById<TextView>(R.id.coin)
-        //val redeemButton = itemView.findViewById<TextView>(R.id.redeemButton)
+        val promotionName = itemView.findViewById<TextView>(R.id.tvPromotionName)
+        val point = itemView.findViewById<TextView>(R.id.tvRedeemfor)
+        val date = itemView.findViewById<TextView>(R.id.tvUsedDate)
+        val code = itemView.findViewById<TextView>(R.id.tvCode)
         val promotionImage = itemView.findViewById<ImageView>(R.id.promotionImage)
     }
 

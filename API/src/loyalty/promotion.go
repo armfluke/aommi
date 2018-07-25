@@ -51,16 +51,23 @@ func UsePromotion(w http.ResponseWriter, r *http.Request) {
 	body := json.NewDecoder(r.Body)
 	body.Decode(&promotion)
 
-	db := ConnectDatabase();
-	if db==nil{
+	fmt.Println(promotion.AccountID)
+	fmt.Println(promotion.PromotionID)
+	fmt.Println(promotion.RewardCode)
+
+	db := ConnectDatabase()
+	if db == nil {
 		message := Status{StatusCode: 500, Status: "Can't connect to database"}
 
 		encoder := json.NewEncoder(w)
 		encoder.Encode(message)
 	}
 	defer db.Close()
-	
+
+	fmt.Println("INSERT INTO promotionUsed (AccountID, PromotionID, RewardCode) VALUES ('" + promotion.AccountID + "'," + strconv.Itoa(promotion.PromotionID) + ",'" + promotion.RewardCode + "')")
+
 	resultsInsert, err := db.Query("INSERT INTO promotionUsed (accountID, promotionID, rewardCode) VALUES ('" + promotion.AccountID + "'," + strconv.Itoa(promotion.PromotionID) + ",'" + promotion.RewardCode + "')")
+
 	resultsInsert.Close()
 
 	if err != nil {
@@ -79,13 +86,13 @@ func UsePromotion(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetPromotionFromDatabase() string {
-	
-	db := ConnectDatabase();
-	if db==nil{
+
+	db := ConnectDatabase()
+	if db == nil {
 		return ""
 	}
 	defer db.Close()
-	
+
 	rows, err := db.Query("SELECT * FROM promotion")
 	if err != nil {
 		return ""

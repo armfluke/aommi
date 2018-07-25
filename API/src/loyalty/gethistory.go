@@ -2,7 +2,6 @@ package loyalty
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -16,8 +15,6 @@ func GetHistory(w http.ResponseWriter, r *http.Request) {
 	var data PostHistoryData
 	body := json.NewDecoder(r.Body)
 	body.Decode(&data)
-
-	fmt.Println(data.AccountID)
 
 	message := GetHistoryFromDatabase(data.AccountID)
 
