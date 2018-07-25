@@ -16,13 +16,13 @@ cursor.execute("UPDATE account SET PointBalance=300  WHERE AccountID='1100400758
 cursor.execute("UPDATE account SET PointBalance=150  WHERE AccountID='1103702074462';")
 cursor.execute("UPDATE account SET PointBalance=450  WHERE AccountID='1140100074828';")
 
-cursor.execute("DELETE FROM codeUsed WHERE AccountID='1100400758552' AND Date(DateEarn)=CURDATE() AND CodeID = 3)")
+cursor.execute("DELETE FROM codeUsed WHERE AccountID='1100400758552' AND Date(DateEarn)=CURDATE() AND CodeID = 3")
 cursor.execute("INSERT INTO codeUsed (AccountID,CodeID,PointEarn) VALUES ('1100400758552',3,20)")
 
-cursor.execute("DELETE FROM codeUsed WHERE AccountID='1103702074462' AND Date(DateEarn)=CURDATE() AND CodeID = 3)")
+cursor.execute("DELETE FROM codeUsed WHERE AccountID='1103702074462' AND Date(DateEarn)=CURDATE() AND CodeID = 3")
 cursor.execute("INSERT INTO codeUsed (AccountID,CodeID,PointEarn) VALUES ('1103702074462',3,20),('1103702074462',3,20)")
 
-cursor.execute("DELETE FROM codeUsed WHERE AccountID='1140100074828' AND Date(DateEarn)=CURDATE() AND CodeID = 3)")
+cursor.execute("DELETE FROM codeUsed WHERE AccountID='1140100074828' AND Date(DateEarn)=CURDATE() AND CodeID = 3")
 cursor.execute("INSERT INTO codeUsed (AccountID,CodeID,PointEarn) VALUES ('1100400758552',3,20),('1100400758552',3,20),('1100400758552',3,20),('1100400758552',3,20)")
 
 db.commit()
