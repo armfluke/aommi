@@ -131,7 +131,7 @@
                                                 <th>พอยท์สะสม</th>
                                                 <th>บัญชีออมทรัพย์</th>
                                                 <th>บัญชีฝากประจำ</th>
-                                                <th style="text-align: center">ล้างค่า</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -147,19 +147,13 @@
                                                             {{end}}
                                                         </td>
                                                         <td>
-                                                                {{if .FixedAccount}}
-                                                                    เปิดแล้ว
-                                                                {{else}}
-                                                                    ยังไม่เปิด
-                                                                {{end}}
+                                                            {{if .FixedAccount}}
+                                                                เปิดแล้ว
+                                                            {{else}}
+                                                               ยังไม่เปิด
+                                                            {{end}}
                                                         </td>
-                                                        <td style="text-align: center">
-                                                                <form action="/web/account/reset" method="post">
-                                                                    <input type="hidden" name="account" value="{{.AccountID}}">
-                                                                    <input class="btn btn-info" name="typeaccount" type="submit" value="Saving">
-                                                                    <input class="btn btn-warning" name="typeaccount" type="submit" value="Fixed">
-                                                                </form>
-                                                        </td>
+                                                        <td></td>
                                                     </tr>
                                                 {{end}}
                                         </tbody>
