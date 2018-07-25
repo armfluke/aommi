@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import com.beust.klaxon.Klaxon
+import com.example.youngtalent61115.aommi.activity.HistoryActivity
 import com.example.youngtalent61115.aommi.networking.Account
 import com.example.youngtalent61115.aommi.networking.Promotion
 import com.example.youngtalent61115.aommi.activity.ScanQRActivity
@@ -71,7 +72,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun clickHistory(account: Account?) {
         btnHistory.setOnClickListener {
-
+            val intent = Intent(applicationContext, HistoryActivity::class.java)
+            intent.putExtra("account", account)
+            startActivity(intent)
         }
     }
 

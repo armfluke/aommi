@@ -11,9 +11,9 @@ src/github.com/
 src/golang.org/
 
 
-src/loyaltyWeb/vendor
-src/loyaltyWeb/js
-src/loyaltyWeb/fonts
-src/loyaltyWeb/css
+#src/loyaltyWeb/vendor
+#src/loyaltyWeb/js
+#src/loyaltyWeb/fonts
+#src/loyaltyWeb/css
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
