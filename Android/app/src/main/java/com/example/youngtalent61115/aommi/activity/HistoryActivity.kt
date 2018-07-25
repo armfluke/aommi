@@ -33,6 +33,7 @@ class HistoryActivity : AppCompatActivity(){
                     Log.d("armfluke", data)
                     val history = ArrayList(Klaxon().parseArray<History>(data))
 
+                    
                 }
             }
         }
